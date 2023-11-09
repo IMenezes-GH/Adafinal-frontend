@@ -1,0 +1,16 @@
+.nav{
+    position: sticky;
+    top: 0;
+
+    & ul {
+        background-color: rgba(14, 14, 17, 0.534);
+        
+        color: white;
+        padding: .75rem 0;
+        border-bottom: 1px solid gray;
+
+        list-style-type: none;
+        display: flex;
+        justify-content: space-around;
+    }
+}
