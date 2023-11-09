@@ -33,6 +33,7 @@ main{
 
 
 .title{
+  cursor: pointer;
   color: rgb(248, 247, 245);
   text-shadow:  -1px -1px 0 rgb(199, 196, 211),
                 3px -3px 0 rgb(22, 165, 190),
@@ -42,6 +43,6 @@ main{
 
 /* APLICAR APÓS SCROLL */
 & .addShadow{
-  box-shadow: 1px 4px 3px rgba(28, 210, 255, 0.938),
-              1px 8px 10px #f8f5f6b0;
+  box-shadow: 1px 2px 4px rgba(28, 210, 255, 0.815),
+              1px 8px 10px #ffffff09;
 }

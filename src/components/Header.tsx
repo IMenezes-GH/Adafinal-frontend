@@ -11,7 +11,7 @@ const Nav = () => {
             <li><Link to={'/'}>Jogos</Link></li>
             <li><Link to={'/'}>Ranking</Link></li>
             <li><Link to={'/'}>Forum</Link></li>
-            <li><Link to={'/'}>Perfil</Link></li>
+            <li><Link to={'login'}>Perfil</Link></li>
         </ul>
     </nav>
   )
@@ -28,12 +28,12 @@ const Header = () => {
   return (
       <div className={styles.headerWrapper}>
         <header id='header'>
-          <h2 className='title'>BestBrowserGames</h2>
+          <h2 draggable={false} className='title'>BestBrowserGames</h2>
           <form action="">
             <input type="search" placeholder='Buscar um jogo'/>
             <button><img src={searchIcon} alt="" /></button>
           </form>
-          <div className={styles.loginContainer}><img src={profileIcon} alt="" /><span>|</span><span>Entrar</span></div>
+          <div className={styles.loginContainer}><img src={profileIcon} alt="" /><span>|</span><Link to={'login'}>Entrar</Link></div>
         </header>
         <Nav />
       </div>

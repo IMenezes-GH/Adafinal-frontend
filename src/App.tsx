@@ -1,22 +1,15 @@
 import Header from './components/Header'
 import './App.css'
-import {Routes, Route} from 'react-router-dom'
+import {Routes, Route, Outlet} from 'react-router-dom'
+import NewsPage from './components/NewsPage'
+import LoginPage from './components/LoginPage'
 
 
 export const Layout = () => {
   return (
     <>
     <Header />
-    <main>
-      <section className='hero'>
-        <div>
-          <h1 className='title big-txt'>BestBrowserGames</h1>
-          <h2>Melhores jogos para seu navegador!</h2>
-        </div>
-      </section>
-      <section>
-      </section>
-    </main>
+    <Outlet />
     </>
   )
 }
@@ -26,7 +19,10 @@ function App() {
   
   return (
     <Routes>
-      <Route path={"/"} element={<Layout />}/>
+      <Route path={"/"} element={<Layout />}>
+        <Route index element={<NewsPage />} />
+        <Route path={"login"} element={<LoginPage />} />
+      </Route>
     </Routes>
   )
 }

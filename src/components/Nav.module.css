@@ -2,11 +2,11 @@
 .headerWrapper{
   position: absolute;
   height: 300vh;
-  width: 100%;
 
 }
   
 header {
+  
     position: sticky;
     top: 0;
   
@@ -23,7 +23,11 @@ header {
     align-items: center;
 
     z-index: 100;
-    
+  
+    & h2 {
+      user-select: none;
+    }
+
     & .loginContainer {
         display: flex;
         align-items: center;
@@ -78,5 +82,13 @@ header {
           list-style-type: none;
           display: flex;
           justify-content: space-around;
+
+          & a:hover{
+            color: rgb(255, 255, 255);
+            text-shadow:  -1px -1px 0 rgb(199, 196, 211),
+                          2px -2px 2px rgb(22, 165, 190),
+                          -2px 2px 2px rgb(231, 71, 43),
+                          1px 1px 0 rgb(131, 61, 40);
+          }
       }
   }
