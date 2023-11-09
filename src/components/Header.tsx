@@ -1,4 +1,3 @@
-
 import profileIcon from '../assets/profile-icon.svg'
 import searchIcon from '../assets/search-icon.svg'
 import styles from './Nav.module.css'
@@ -20,10 +19,15 @@ const Nav = () => {
 
 
 const Header = () => {
+
+  document.addEventListener('scroll', () => {
+    const header = document.getElementById('header');
+    window.scrollY > 20 ? header?.classList.add('addShadow') : header?.classList.remove('addShadow')
+  })
+
   return (
-    <section className='head'>
       <div className={styles.headerWrapper}>
-        <header>
+        <header id='header'>
           <h2 className='title'>BestBrowserGames</h2>
           <form action="">
             <input type="search" placeholder='Buscar um jogo'/>
@@ -33,7 +37,6 @@ const Header = () => {
         </header>
         <Nav />
       </div>
-    </section>
   )
 }
 

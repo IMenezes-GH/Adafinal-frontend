@@ -36,3 +36,7 @@ a, a:active, a:visited{
 .big-txt{
   font-size: 3.5em;
 }
+
+#root{
+  position: absolute;
+}
