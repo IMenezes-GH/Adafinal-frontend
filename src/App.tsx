@@ -8,12 +8,14 @@ export const Layout = () => {
     <>
     <Header />
     <main>
-      <div className='hero'>
-        <div className='wrapper'>
-          <h1>Melhores jogos para navegadores</h1>
+      <section className='hero'>
+        <div>
+          <h1 className='title big-txt'>BestBrowserGames</h1>
+          <h2>Melhores jogos para seu navegador!</h2>
         </div>
-      </div>
-
+      </section>
+      <section>
+      </section>
     </main>
     </>
   )

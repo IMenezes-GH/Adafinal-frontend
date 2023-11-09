@@ -1,4 +1,5 @@
 
+import profileIcon from '../assets/profile-icon.svg'
 import searchIcon from '../assets/search-icon.svg'
 import styles from './Nav.module.css'
 import { Link } from 'react-router-dom'
@@ -21,14 +22,14 @@ const Nav = () => {
 const Header = () => {
   return (
     <section className='head'>
-      <div className='header-wrapper'>
+      <div className={styles.headerWrapper}>
         <header>
           <h2 className='title'>BestBrowserGames</h2>
           <form action="">
             <input type="search" placeholder='Buscar um jogo'/>
             <button><img src={searchIcon} alt="" /></button>
           </form>
-          <p>Entrar</p>
+          <div className={styles.loginContainer}><img src={profileIcon} alt="" /><span>|</span><span>Entrar</span></div>
         </header>
         <Nav />
       </div>

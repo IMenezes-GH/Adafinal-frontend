@@ -25,9 +25,14 @@
 body{
   background-color: var(--bg-color);
   color: var(--txt-color);
+  overflow-x: hidden;
 }
 
 a, a:active, a:visited{
   color: white;
   text-decoration: none;
+}
+
+.big-txt{
+  font-size: 3.5em;
 }
