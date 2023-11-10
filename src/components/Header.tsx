@@ -8,10 +8,10 @@ const Nav = () => {
     <nav className={styles.nav}>
         <ul>
             <li><Link to={'/'}>Notícias</Link></li>
-            <li><Link to={'/'}>Jogos</Link></li>
-            <li><Link to={'/'}>Ranking</Link></li>
-            <li><Link to={'/'}>Forum</Link></li>
-            <li><Link to={'login'}>Perfil</Link></li>
+            <li><Link to={'games'}>Jogos</Link></li>
+            <li><Link to={'ranking'}>Ranking</Link></li>
+            <li><Link to={'forum'}>Forum</Link></li>
+            <li><Link to={'profile'}>Perfil</Link></li>
         </ul>
     </nav>
   )

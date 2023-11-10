@@ -1,4 +1,4 @@
-import styles from './LoginPage.module.css';
+import styles from './LoginLayout.module.css';
 import { Outlet, Link } from 'react-router-dom';
 
 const LoginPage = () => {
