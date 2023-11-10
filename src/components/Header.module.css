@@ -1,8 +1,7 @@
 
 .headerWrapper{
-  height: 300vh;
+  height: 100vh;
   user-select: none;
-  /* z-index: 10; */
 }
 
 header {

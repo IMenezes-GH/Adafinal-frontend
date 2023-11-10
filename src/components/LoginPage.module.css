@@ -1,20 +1,93 @@
+.loginPage{
+    background-image: url('./marek-piwnicki-t9AKq7vFYlc-unsplash.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+.loginSection{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.74);
+    display: grid;
+}
+
 .signForm{
     border: 1px solid white;
     background-color: #101013;
     color: rgb(236, 231, 231);
+    
+    margin: .5rem auto;
     display: flex;
     flex-direction: column;
-    width: 20vw;
-    padding: 1rem;
-    gap: .5rem;
-    margin: auto;
 
-    & input{
+    /* width: 60vw; */
+    height: fit-content;
+
+    gap: .5rem;
+    padding: 3.5rem;
+
+    &.animate{
+        animation: colorSwap 2s linear 0s infinite alternate forwards;
+    }
+
+    & input, select{
         background-color: #0a0a0a;
         color: white;
         height: 1.5rem;
         border: 1px solid white;
         border-radius: .2rem;
-        padding: .2rem;
+        padding: .4rem;
+        font-size: 1.2rem;
+        box-sizing: content-box;
+    }
+
+    & > div {
+        margin-top: 1rem;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+
+        & > div{
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            gap: .5rem;
+        }
+    }
+
+    & button{
+        border: 2px solid white;
+        cursor: pointer;
+        flex-grow: 1;
+        height: 2.5rem;
+        background-color: transparent;
+        color: white;
+        font-weight: 600;
+        font-size: .75rem;
+        &:first-child{
+            background-color: rgba(32, 31, 31, 0.459);
+            color: rgb(255, 251, 251);
+            border: 2px solid rgb(255, 251, 251);
+
+        }
+
+        &:last-child:hover{
+            animation: colorSwap 2s linear 0s infinite alternate forwards;
+        }
+    }
+
+}
+
+@keyframes colorSwap {
+    from {
+        border-color: rgb(0, 225, 255);
+        box-shadow: 0px 4px 15px rgba(0, 225, 255, 0.247);
+    }
+    to {
+        border-color: rgb(0, 225, 255);
+        color: white;
+        box-shadow: 0px 4px 15px rgb(0, 225, 255);
     }
 }
