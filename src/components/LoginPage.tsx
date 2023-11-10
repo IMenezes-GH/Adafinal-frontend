@@ -1,10 +1,13 @@
-import React from 'react'
 
 const LoginPage = () => {
   return (
+    <>
     <main>
+      <section>
         LoginPage
+      </section>
     </main>
+    </>
   )
 }
 

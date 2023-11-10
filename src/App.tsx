@@ -8,7 +8,9 @@ import LoginPage from './components/LoginPage'
 export const Layout = () => {
   return (
     <>
-    <Header />
+    <div className='block'>
+      <Header />
+    </div>
     <Outlet />
     </>
   )
