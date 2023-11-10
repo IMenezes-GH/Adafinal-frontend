@@ -47,8 +47,19 @@ main{
                 1px 1px 0 rgb(131, 61, 40);
 }
 
+
+@keyframes tweakColor {
+  from{
+    box-shadow: 1px 2px 10px rgba(28, 210, 255, 0.815),
+    1px 8px 10px #ffffff09;
+
+  } to {
+    box-shadow: 1px 2px 10px rgba(230, 70, 91, 0.815),
+    1px 8px 10px #ffffff09;
+  }
+}
+
 /* APLICAR APÓS SCROLL */
 & .addShadow{
-  box-shadow: 1px 2px 4px rgba(28, 210, 255, 0.815),
-              1px 8px 10px #ffffff09;
+  animation: tweakColor 5s ease-in-out 0s infinite alternate;
 }

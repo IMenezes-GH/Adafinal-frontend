@@ -1,8 +1,8 @@
 import Header from './components/Header'
 import './App.css'
 import {Routes, Route, Outlet} from 'react-router-dom'
-import NewsPage from './components/NewsPage'
-import LoginPage from './components/LoginPage'
+import NewsPage from './components/Layouts/NewsPage'
+import LoginPage from './components/Layouts/LoginPage'
 
 
 export const Layout = () => {

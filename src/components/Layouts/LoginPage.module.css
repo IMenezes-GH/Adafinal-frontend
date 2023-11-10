@@ -14,19 +14,15 @@
 }
 
 .signForm{
-    border: 1px solid white;
-    background-color: #101013;
+    /* border: 1px solid white; */
+    background: linear-gradient(rgb(8, 8, 26), rgba(39, 9, 9, 0.486));
     color: rgb(236, 231, 231);
     
-    margin: .5rem auto;
     display: flex;
     flex-direction: column;
 
-    /* width: 60vw; */
-    height: fit-content;
-
     gap: .5rem;
-    padding: 3.5rem;
+    padding: 3.5rem 20rem;
 
     &.animate{
         animation: colorSwap 2s linear 0s infinite alternate forwards;
@@ -59,10 +55,10 @@
 
     & button{
         border: 2px solid white;
+        background-color: black;
         cursor: pointer;
         flex-grow: 1;
         height: 2.5rem;
-        background-color: transparent;
         color: white;
         font-weight: 600;
         font-size: .75rem;
@@ -71,16 +67,19 @@
             color: rgb(255, 251, 251);
             border: 2px solid rgb(255, 251, 251);
 
+            &:hover{
+                animation: colorSwapRed 2s linear 0s infinite alternate forwards;
+            }
         }
 
         &:last-child:hover{
-            animation: colorSwap 2s linear 0s infinite alternate forwards;
+            animation: colorSwapBlue 2s linear 0s infinite alternate forwards;
         }
     }
 
 }
 
-@keyframes colorSwap {
+@keyframes colorSwapBlue {
     from {
         border-color: rgb(0, 225, 255);
         box-shadow: 0px 4px 15px rgba(0, 225, 255, 0.247);
@@ -89,5 +88,17 @@
         border-color: rgb(0, 225, 255);
         color: white;
         box-shadow: 0px 4px 15px rgb(0, 225, 255);
+    }
+}
+
+@keyframes colorSwapRed {
+    from {
+        border-color: rgb(255, 0, 0);
+        box-shadow: 0px 4px 15px rgba(255, 0, 0, 0.247);
+    }
+    to {
+        border-color: rgb(255, 0, 0);
+        color: white;
+        box-shadow: 0px 4px 15px rgb(255, 0, 0);
     }
 }

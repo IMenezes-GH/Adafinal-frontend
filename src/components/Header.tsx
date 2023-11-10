@@ -22,7 +22,7 @@ const Header = () => {
 
   document.addEventListener('scroll', () => {
     const header = document.getElementById('header');
-    window.scrollY > 20 ? header?.classList.add('addShadow') : header?.classList.remove('addShadow')
+    window.scrollY > 5 ? header?.classList.add('addShadow') : header?.classList.remove('addShadow')
   })
 
   return (

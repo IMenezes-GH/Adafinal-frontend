@@ -24,6 +24,8 @@ header {
   align-items: center;
 
   z-index: 100;
+
+  transition: 1.5s linear;
   
     & h2 {
       user-select: none;
