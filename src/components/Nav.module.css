@@ -10,7 +10,7 @@ header {
     position: sticky;
     top: 0;
   
-    background-color: rgb(14, 14, 17);
+    background-color: rgba(14, 14, 17, 0.911);
     border-bottom: 1px dotted rgba(248, 248, 248, 0.062);
 
     color: white;
@@ -73,7 +73,7 @@ header {
   .nav{
     & ul {
           
-          background-color: rgb(14, 14, 17);
+          background-color: rgba(14, 14, 17, 0.911);
           width: 100vw;
           color: white;
           padding: .75rem 0;
@@ -82,6 +82,10 @@ header {
           list-style-type: none;
           display: flex;
           justify-content: space-around;
+
+          & a {
+            user-select: none;
+          }
 
           & a:hover{
             color: rgb(255, 255, 255);

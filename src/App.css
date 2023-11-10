@@ -5,12 +5,11 @@ main{
   color: var(--light);
   min-height: 100vh;
   & .hero{
-    margin-top: 1%;
     background-image: url('public/brendan-miranda-OwTA4466nSI-unsplash.jpg');
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: 0 -20rem;
-    height: 35rem;
+    height: 45rem;
     min-width: 100vw;
     background-color: rgb(10, 10, 10);
     border-bottom: 1px solid rgb(252, 243, 243);
@@ -19,7 +18,7 @@ main{
     
     display: grid;
     align-content: end;
-    & >div{
+    & >.bottom{
       text-align: left;
       width: 100vw;
       height: 10vh;
