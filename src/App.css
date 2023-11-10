@@ -9,7 +9,6 @@ main{
   color: var(--light);
   min-height: 100vh;
   & section{
-    height: 45rem;
     min-width: 100vw;
   }
 

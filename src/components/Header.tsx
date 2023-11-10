@@ -1,6 +1,6 @@
 import profileIcon from '../assets/profile-icon.svg'
 import searchIcon from '../assets/search-icon.svg'
-import styles from './Nav.module.css'
+import styles from './Header.module.css'
 import { Link } from 'react-router-dom'
 
 const Nav = () => {
@@ -26,7 +26,8 @@ const Header = () => {
   })
 
   return (
-      <div className={styles.headerWrapper}>
+    <>
+      <div draggable={false} className={styles.headerWrapper}>
         <header id='header'>
           <h2 draggable={false} className='title'>BestBrowserGames</h2>
           <form action="">
@@ -37,6 +38,7 @@ const Header = () => {
         </header>
         <Nav />
       </div>
+    </>
   )
 }
 
