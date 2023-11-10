@@ -6,6 +6,7 @@ interface INewsCard {
         content: string
     },
     handleClick: MouseEventHandler<HTMLButtonElement>
+    num: number
 }
 
 export const NewsCard = (props: INewsCard) => {
@@ -14,9 +15,9 @@ export const NewsCard = (props: INewsCard) => {
       <article className={styles.card}>
    
         <div>
-          <button id='leftArrow' type='button' value='subtract' onClick={(ev) => props.handleClick(ev)}>⮜</button>
+          {props.num !== 0 ?  <button id='leftArrow' type='button' value='subtract' onClick={(ev) => props.handleClick(ev)}>⮜</button> : <span></span>}
           <span>{props.data.content}</span>
-          <button id='RightArrow' type='button' value='add' onClick={(ev) => props.handleClick(ev)}>⮞</button>
+          {props.num !== 4 ? <button id='RightArrow' type='button' value='add' onClick={(ev) => props.handleClick(ev)}>⮞</button>: <span></span>}
         </div>
       </article>
     )
@@ -49,7 +50,7 @@ export default class Carousel extends Component {
     return (
     <div id='carousel' className={styles.carousel} style={{transform: `translateX(${-50 * this.state.currentIndex}rem)` ,gridTemplateColumns: `repeat(${this.state.cards.length}, 50rem)`}}>
         {this.state.cards.map((card, index) => {
-        return <NewsCard key={index} data={card} handleClick={this.handleClick.bind(this)}/>
+        return <NewsCard key={index} num={index} data={card} handleClick={this.handleClick.bind(this)}/>
         })}
     </div>
     )
