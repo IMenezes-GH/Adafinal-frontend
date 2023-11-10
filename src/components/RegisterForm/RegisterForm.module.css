@@ -1,0 +1,91 @@
+
+
+.signForm{
+    /* border: 1px solid white; */
+    background: linear-gradient(rgb(8, 8, 26), rgba(39, 9, 9, 0.486));
+    color: rgb(236, 231, 231);
+    
+    display: flex;
+    flex-direction: column;
+
+    gap: .5rem;
+    padding: 3.5rem 20rem;
+
+    &.animate{
+        animation: colorSwap 2s linear 0s infinite alternate forwards;
+    }
+
+    & input, select{
+        background-color: #0a0a0a;
+        color: white;
+        height: 1.5rem;
+        border: 1px solid white;
+        border-radius: .2rem;
+        padding: .4rem;
+        font-size: 1.2rem;
+        box-sizing: content-box;
+    }
+
+    & > div {
+        margin-top: 1rem;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+
+        & > div{
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            gap: .5rem;
+        }
+    }
+
+    & button{
+        border: 2px solid white;
+        background-color: black;
+        cursor: pointer;
+        flex-grow: 1;
+        height: 2.5rem;
+        color: white;
+        font-weight: 600;
+        font-size: .75rem;
+        &:first-child{
+            background-color: rgba(32, 31, 31, 0.459);
+            color: rgb(255, 251, 251);
+            border: 2px solid rgb(255, 251, 251);
+
+            &:hover{
+                animation: colorSwapRed 2s linear 0s infinite alternate forwards;
+            }
+        }
+
+        &:last-child:hover{
+            animation: colorSwapBlue 2s linear 0s infinite alternate forwards;
+        }
+    }
+
+}
+
+@keyframes colorSwapBlue {
+    from {
+        border-color: rgb(0, 225, 255);
+        box-shadow: 0px 4px 15px rgba(0, 225, 255, 0.247);
+    }
+    to {
+        border-color: rgb(0, 225, 255);
+        color: white;
+        box-shadow: 0px 4px 15px rgb(0, 225, 255);
+    }
+}
+
+@keyframes colorSwapRed {
+    from {
+        border-color: rgb(255, 0, 0);
+        box-shadow: 0px 4px 15px rgba(255, 0, 0, 0.247);
+    }
+    to {
+        border-color: rgb(255, 0, 0);
+        color: white;
+        box-shadow: 0px 4px 15px rgb(255, 0, 0);
+    }
+}
