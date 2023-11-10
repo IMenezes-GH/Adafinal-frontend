@@ -47,6 +47,12 @@ main{
                 1px 1px 0 rgb(131, 61, 40);
 }
 
+.activeBox {
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(255, 255, 255);
+  color: rgb(15, 92, 122);
+  cursor: pointer;
+}
 
 @keyframes tweakColor {
   from{

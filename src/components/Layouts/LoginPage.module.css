@@ -1,14 +1,38 @@
 .loginPage{
-    background-image: url('./marek-piwnicki-t9AKq7vFYlc-unsplash.jpg');
+    background-image: url('/boris-langvand-XJs1pH6wftw-unsplash.jpg');
+    /* background: linear-gradient(rgb(8, 8, 26), rgba(39, 9, 9, 0.486)); */
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 90vh;
     overflow-x: hidden;
 }
 
-.loginSection{
+.loginNav{
+    display: flex;
+
+    justify-content: space-evenly;
+    align-items: center;
     width: 100%;
+    font-size: 2rem;
+    & > a {
+        padding: 0 1rem;
+        flex-grow: 1;
+        text-align: center;
+        border: 2px solid white;
+        &:hover{
+            background-color: rgb(255, 255, 255);
+            border: 2px solid rgb(255, 255, 255);
+            color: rgb(15, 92, 122);
+            cursor: pointer;
+        }
+    }
+}
+
+.loginSection{
     height: 100%;
     background-color: rgba(0, 0, 0, 0.74);
-    display: grid;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-direction: column;
 }

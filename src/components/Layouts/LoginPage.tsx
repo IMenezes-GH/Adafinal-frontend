@@ -1,14 +1,17 @@
 import styles from './LoginPage.module.css';
-import RegisterForm from '../RegisterForm/RegisterForm';
+import { Outlet, Link } from 'react-router-dom';
 
 const LoginPage = () => {
-
 
   return (
     <>
     <main className={styles.loginPage}>
       <section className={styles.loginSection}>
-        <RegisterForm />
+        <nav className={styles.loginNav}>
+          <Link to={""}>Login</Link>
+          <Link to={"register"}>Cadastrar</Link>
+        </nav>
+        <Outlet />
       </section>
     </main>
     </>
