@@ -1,9 +1,11 @@
 import {useState, FormEvent, ChangeEvent} from 'react'
 import fetchData from '../../api/fetchData';
 import styles from './RegisterForm.module.css'
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
 
+    const navigate = useNavigate();
 
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
@@ -43,6 +45,7 @@ const RegisterForm = () => {
         setUsername('');
         setBirthDate('');
         (ev.target as HTMLFormElement).reset()
+        navigate('/login')
       }
     }
 

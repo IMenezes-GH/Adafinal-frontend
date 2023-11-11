@@ -1,7 +1,7 @@
 import styles from './LoginLayout.module.css';
 import { Outlet, Link } from 'react-router-dom';
 
-const LoginPage = () => {
+const LoginLayout = () => {
 
   return (
     <>
@@ -18,4 +18,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default LoginLayout

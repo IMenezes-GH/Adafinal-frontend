@@ -1,9 +1,17 @@
-const ProfileLayout = () => {
-  
+interface props {
+  user: User,
+  setUser : CallableFunction
+}
+
+
+const ProfileLayout = (props: props) => {
 
 
   return (
-    <main>ProfileLayout</main>
+    <main>
+        <p>{props.user.username}
+        </p>
+    </main>
   )
 }
 

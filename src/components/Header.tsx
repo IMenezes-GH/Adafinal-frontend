@@ -3,6 +3,12 @@ import searchIcon from '../assets/search-icon.svg'
 import styles from './Header.module.css'
 import { Link } from 'react-router-dom'
 
+interface userProps {
+  user: User,
+  setUser : CallableFunction
+  token: string
+}
+
 const Nav = () => {
   return (
     <nav className={styles.nav}>
@@ -18,7 +24,7 @@ const Nav = () => {
 }
 
 
-const Header = () => {
+const Header = (props: userProps) => {
 
   document.addEventListener('scroll', () => {
     const header = document.getElementById('header');
@@ -34,7 +40,11 @@ const Header = () => {
             <input type="search" placeholder='Buscar um jogo'/>
             <button><img src={searchIcon} alt="" /></button>
           </form>
-          <div className={styles.loginContainer}><img src={profileIcon} alt="" /><span>|</span><Link to={'login'}>Entrar</Link></div>
+          <div className={styles.loginContainer}>
+            <img src={profileIcon} alt="" />
+            <span>|</span>
+            <Link to={props.token ? 'profile' : 'login'}>{props.user.username || 'Entrar'}</Link>
+          </div>
         </header>
         <Nav />
       </div>

@@ -9,3 +9,14 @@ type Game = {
     ratings: string[],
     url: string
 }
+
+type User = {
+    _id?: string,
+    active?: boolean,
+    birthDate?: string,
+    country?: string,
+    email?: string,
+    name: string,
+    roles?: string,
+    username: string
+}
