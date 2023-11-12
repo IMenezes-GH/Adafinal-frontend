@@ -21,7 +21,8 @@ type User = {
     name: string,
     roles?: string,
     username: string,
-    banner?: string
+    banner?: string,
+    profileImageURL?: string,
 }
 
 type Review = {

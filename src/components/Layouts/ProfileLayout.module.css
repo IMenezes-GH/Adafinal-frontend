@@ -1,8 +1,7 @@
 .profileBento > section{
     background-color: rgb(19, 19, 19);
-
     min-width: 90%;
-
+    /* background-color: transparent; */
     display: flex;
     padding: 1.5rem;
 
@@ -44,8 +43,13 @@
     /* height: 25%; */
     aspect-ratio: 1;
 
-    background-color: #1a1a1b;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+
     border: 4px double rgba(255, 255, 255, 0.37);
+    z-index: 3;
+  
 }
 
 .profileArticle{

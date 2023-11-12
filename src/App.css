@@ -4,8 +4,10 @@
   height: 11vh;
 }
 
+
 main{
-  background-color: var(--dark);
+  /* background-color: var(--dark); */
+  /* z-index: -100; */
   color: var(--light);
   & section{
     min-width: 100vw;

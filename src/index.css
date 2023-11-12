@@ -28,6 +28,20 @@ body{
   overflow-x: hidden;
 }
 
+button {
+  appearance: none;
+  border: 1px solid transparent;
+  padding: .2rem;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 500;
+  flex-grow: 1;
+
+  &:hover{
+    background-color: #232323;
+    color: white;
+  }
+}
+
 a, a:active, a:visited{
   color: white;
   text-decoration: none;
