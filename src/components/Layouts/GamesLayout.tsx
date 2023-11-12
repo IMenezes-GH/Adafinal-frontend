@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-// const URL = 'https://adafinal-backend.vercel.app/games';
-const URL = 'http://localhost:3000/games';
+// const FETCH_URL = 'https://adafinal-backend.vercel.app/games';
+const FETCH_URL = 'http://localhost:3000/games';
 
 const GamesPage = () => {
 
@@ -13,7 +13,7 @@ const GamesPage = () => {
   useEffect(() => {
 
     const fetchGames = async () => {
-      const fetchGames = await fetch(URL);
+      const fetchGames = await fetch(FETCH_URL);
       const data = await fetchGames.json()
       return data;
     }

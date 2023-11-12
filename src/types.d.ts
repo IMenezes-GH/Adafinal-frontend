@@ -20,3 +20,10 @@ type User = {
     roles?: string,
     username: string
 }
+
+interface userProps {
+    user: User,
+    setUser: CallableFunction
+    token: string,
+    setToken: CallableFunction
+}

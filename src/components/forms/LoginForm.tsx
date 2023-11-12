@@ -6,14 +6,6 @@ import { FormEvent, useState } from 'react'
 // const URL: string = 'https://adafinal-backend.vercel.app'
 const URL: string = 'http://localhost:3000'
 
-
-interface userProps {
-  user: string,
-  setUser: CallableFunction
-  token: string,
-  setToken: CallableFunction
-}
-
 const LoginForm = (props: userProps) => {
 
   const navigate = useNavigate();
