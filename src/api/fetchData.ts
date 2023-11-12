@@ -16,6 +16,22 @@ const requestAPI = async(url: string, options: RequestInit, errorMessage = '100'
     }
 }
 
+export const refreshAPI = async(url: string) => {
+
+    const response = await fetch(url + '/auth/refresh', {
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    const data = await response.json();
+    return {ok: response.ok, data}
+
+}
+
 interface login {
     email: string,
     password: string

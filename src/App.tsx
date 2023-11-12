@@ -11,19 +11,33 @@ import ForumLayout from './components/Layouts/ForumLayout'
 import ProfileLayout from './components/Layouts/ProfileLayout'
 
 import { useEffect, useState } from 'react'
-import { useCookies } from 'react-cookie'
+import { jwtDecode } from 'jwt-decode'
+import { refreshAPI } from './api/fetchData'
 
+const url = 'http://localhost:3000'
 
 function App() {
   
   const [user, setUser] = useState<User>({username: '', name: ''});
   const [token, setToken] = useState('');
-  const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
 
-
+  
   useEffect(() => {
-    console.log(cookies);
-  }, [cookies])
+    if (token) {
+
+      const jwt = (jwtDecode(token))
+      
+      const current_time = new Date().getTime() / 1000;
+      if (current_time > jwt.exp!) {
+
+        const data = (async () => await refreshAPI(url))();
+        data.then((d) => {
+          setUser(d.data.user)
+          setToken(d.data.token)
+        })
+      }
+    }
+  }, [token, user])
 
   const Layout = () => {
     

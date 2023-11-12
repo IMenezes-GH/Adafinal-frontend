@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import fetchData from "../../api/fetchData"
 
 // const URL = 'https://adafinal-backend.vercel.app/games';
 const URL = 'http://localhost:3000/games';

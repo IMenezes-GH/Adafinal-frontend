@@ -38,7 +38,7 @@ const RegisterForm = () => {
         },
         body: JSON.stringify(user)
       })
-      if (signIn?.response.ok) {
+      if (signIn) {
         setName('');
         setPassword('');
         setEmail('');
