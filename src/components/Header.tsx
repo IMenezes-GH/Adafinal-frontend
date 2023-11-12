@@ -9,23 +9,23 @@ interface userProps {
   token: string
 }
 
-const Nav = () => {
-  return (
-    <nav className={styles.nav}>
-        <ul>
-            <li><Link to={'/'}>Notícias</Link></li>
-            <li><Link to={'games'}>Jogos</Link></li>
-            <li><Link to={'ranking'}>Ranking</Link></li>
-            <li><Link to={'forum'}>Forum</Link></li>
-            <li><Link to={'profile'}>Perfil</Link></li>
-        </ul>
-    </nav>
-  )
-}
 
 
 const Header = (props: userProps) => {
-
+  
+  const Nav = () => {
+    return (
+      <nav className={styles.nav}>
+          <ul>
+              <li><Link to={'/'}>Notícias</Link></li>
+              <li><Link to={'games'}>Jogos</Link></li>
+              <li><Link to={'ranking'}>Ranking</Link></li>
+              <li><Link to={'forum'}>Forum</Link></li>
+              <li><Link to={props.token ? 'profile' : 'login'}>Perfil</Link></li>
+          </ul>
+      </nav>
+    )
+  }
   document.addEventListener('scroll', () => {
     const header = document.getElementById('header');
     window.scrollY > 5 ? header?.classList.add('addShadow') : header?.classList.remove('addShadow')

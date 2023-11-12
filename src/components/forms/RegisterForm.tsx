@@ -1,5 +1,5 @@
 import {useState, FormEvent, ChangeEvent} from 'react'
-import fetchData from '../../api/fetchData';
+import requestAPI from '../../api/fetchData';
 import styles from './RegisterForm.module.css'
 import { useNavigate } from 'react-router-dom';
 
@@ -30,7 +30,7 @@ const RegisterForm = () => {
         birthDate
       }
   
-      const signIn = await fetchData('https://adafinal-backend.vercel.app/users', {
+      const signIn = await requestAPI('https://adafinal-backend.vercel.app/users', {
         method: 'POST',
         mode: 'cors',
         headers: {

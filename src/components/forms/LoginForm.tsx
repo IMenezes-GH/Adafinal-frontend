@@ -1,7 +1,11 @@
 import styles from './RegisterForm.module.css'
 import { Link, useNavigate } from 'react-router-dom'
-import fetchData from '../../api/fetchData'
-import { FormEvent } from 'react'
+import {loginAPI} from '../../api/fetchData'
+import { FormEvent, useState } from 'react'
+
+// const URL: string = 'https://adafinal-backend.vercel.app'
+const URL: string = 'http://localhost:3000'
+
 
 interface userProps {
   user: string,
@@ -13,33 +17,30 @@ interface userProps {
 const LoginForm = (props: userProps) => {
 
   const navigate = useNavigate();
+  const [message, setMessage] = useState('');
 
   const handleSubmit = async(ev: FormEvent) => {
     ev.preventDefault();
     const target = ev.target as HTMLFormElement;
 
-    const data = {
+    const loginData = {
       email: target.email.value,
-      password: target.password.value,
-      confirmPassword: target.password.value
+      password: target.password.value
     }
 
-    const res = await fetchData('https://adafinal-backend.vercel.app/auth/login', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {  
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    if (res?.response.ok) {
-      const userResponse = await fetchData(`https://adafinal-backend.vercel.app/users?email=${data.email}`, {method: 'GET'})
-      props.setUser(userResponse?.message);
-      props.setToken(res.message.token);
+    const login = await loginAPI(URL, loginData);
+    document.body.style.cursor = 'wait'
 
-      navigate('/')
+    setMessage(login.data.message);
+    if (login.ok) {
+
+      props.setUser(login.data.user);
+      props.setToken(login.data.token);
+      navigate('/profile')
     }
-    else console.error(res)
+    else setMessage(login.data.message);
+
+    document.body.style.cursor = 'auto'
   }
 
   return (
@@ -53,6 +54,7 @@ const LoginForm = (props: userProps) => {
             <button type='submit'>Login</button>
         </div>
         <Link to={"register"}>Não tem uma conta?</Link>
+        <output>{message}</output>
     </form>
   )
 }

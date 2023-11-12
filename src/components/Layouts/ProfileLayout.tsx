@@ -6,6 +6,7 @@ interface props {
 
 const ProfileLayout = (props: props) => {
 
+  console.log(props.user)
 
   return (
     <main>

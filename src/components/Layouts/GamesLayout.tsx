@@ -1,23 +1,28 @@
 import { useEffect, useState } from "react";
 import fetchData from "../../api/fetchData"
 
+// const URL = 'https://adafinal-backend.vercel.app/games';
+const URL = 'http://localhost:3000/games';
+
 const GamesPage = () => {
 
 
   const [gameList, setGameList] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const url = 'https://adafinal-backend.vercel.app/games';
   
   useEffect(() => {
 
+    const fetchGames = async () => {
+      const fetchGames = await fetch(URL);
+      const data = await fetchGames.json()
+      return data;
+    }
+
     if (!sessionStorage.getItem('games')){
-      const fetchGames = async () => {return await fetchData(url, {method: 'GET'})}
-      const data = (async() => await fetchGames())();
-     
-      data.then((d) => {
-        sessionStorage.setItem('games', JSON.stringify(d?.message));
-        setGameList(d?.message)
+      (async() => await fetchGames())().then((d) => {
+        sessionStorage.setItem('games', JSON.stringify(d));
+        setGameList(d)
         setIsLoaded(true)
       })
     }
@@ -39,7 +44,6 @@ const GamesPage = () => {
         <section>
           <ul>
             {isLoaded ? gameList.map((game: Game, index) => {
-              console.log(gameList)
               return (
               <li key={index}>
                 <article>
