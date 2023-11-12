@@ -52,6 +52,7 @@
     aspect-ratio: 1;
 
     background-color: transparent;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
 
