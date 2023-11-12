@@ -18,7 +18,7 @@ const FETCH_URL = 'http://localhost:3000'
 
 function App() {
   
-  const [user, setUser] = useState<User>({username: '', name: ''});
+  const [user, setUser] = useState<User>({username: '', name: '', description: '', state: '', country: ''});
   const [token, setToken] = useState('');
 
   
@@ -56,7 +56,7 @@ function App() {
       <Route path={"/"} element={<Layout />}>
         <Route index element={<NewsLayout/>} />
         <Route path={"games"} element={<GamesLayout />} />
-        <Route path={"profile"} element={<ProfileLayout user={user} setUser={setUser}/>} />
+        <Route path={"profile"} element={<ProfileLayout token={token} user={user} setUser={setUser} setToken={setToken}/>} />
         <Route path={"forum"} element={<ForumLayout />} />
         <Route path={"ranking"} element={<RankingLayout />} />
         <Route path={"login"} element={<LoginLayout />} >
