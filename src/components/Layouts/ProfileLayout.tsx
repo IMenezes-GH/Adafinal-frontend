@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import requestAPI from '../../api/fetchData';
+import { useEffect, useState } from 'react';
 import styles from './ProfileLayout.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -22,15 +21,25 @@ const ReviewItem = (props:IReview) => {
 
 const ProfileLayout = (props: userProps) => {
 
+  const [userReviews, setUserReviews] = useState([]);
+
   const navigate = useNavigate();
+
+  const getUserRatings = async () => {
+    const response = await fetch(URL + '/ratings?user=' + props.user.id);
+    const data = await response.json();
+    console.log(data, userReviews)
+    setUserReviews(data);
+  }
 
   useEffect(() => {
     if (!props.user || !props.token || !props.setToken || !props.setUser) navigate('/');
+    getUserRatings()
   }, [])
+  // getUserRatings();
 
   const handleEditProfile = async () => {
     if (!props.user || !props.token) return;
-
     const data = {
       username: props.user.username,
       id: props.user.id,
@@ -77,7 +86,17 @@ const ProfileLayout = (props: userProps) => {
             <h3>Últimos reviews:</h3>
             <hr />
             <ul className={styles.profileReviewsList}>
-              <ReviewItem link='/' title='Test game here' score={0}/>
+              { 
+               userReviews.length > 1 && userReviews.map((review: Review, index) => {
+                  return (
+                    <ReviewItem 
+                      key={index} 
+                      link='/' 
+                      title={review.game} 
+                      score={review.score}/>
+                      )})}
+              {userReviews.length === 0 && <p>Esse usuário não possui reviews</p>}
+             
             </ul>
           </div>
         </div>
@@ -92,7 +111,7 @@ const ProfileLayout = (props: userProps) => {
             <p>{props.user?.description}</p>
             <hr />
             <div className={styles.banner}>
-              <p>Insert banner here</p>
+              <p>{!props.user.banner && 'Escolha um banner para seu perfil'}</p>
             </div>
           </div>
         </div>

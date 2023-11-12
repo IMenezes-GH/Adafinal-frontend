@@ -12,15 +12,24 @@ type Game = {
 
 type User = {
     id?: string,
-    description: string,
-    state: string,
+    description?: string,
+    state?: string,
     active?: boolean,
     birthDate?: string,
     country?: string,
     email?: string,
     name: string,
     roles?: string,
-    username: string
+    username: string,
+    banner?: string
+}
+
+type Review = {
+    id: string,
+    game: string,
+    user: string,
+    description: string,
+    score: number,
 }
 
 interface userProps {
@@ -29,3 +38,4 @@ interface userProps {
     token: string,
     setToken: CallableFunction
 }
+
