@@ -13,6 +13,7 @@ import ProfileLayout from './components/Layouts/ProfileLayout'
 import { useEffect, useState } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { refreshAPI } from './api/fetchData'
+import Logout from './components/Logout'
 
 const FETCH_URL = 'http://localhost:3000'
 
@@ -59,6 +60,7 @@ function App() {
         <Route path={"profile"} element={<ProfileLayout token={token} user={user} setUser={setUser} setToken={setToken}/>} />
         <Route path={"forum"} element={<ForumLayout />} />
         <Route path={"ranking"} element={<RankingLayout />} />
+        <Route path={'logout'} element={<Logout />} />
         <Route path={"login"} element={<LoginLayout />} >
           <Route index element={<LoginForm token={token} setToken={setToken} user={user} setUser={setUser} />} />
           <Route path={'register'} element={<RegisterForm />} />

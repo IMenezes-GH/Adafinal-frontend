@@ -4,6 +4,37 @@
   user-select: none;
 }
 
+.dropDown{
+  box-sizing: border-box;
+  width: 15vw;
+  background-color: #47474d;
+  position: absolute;
+  top: 6vh;
+  right: 0;
+  
+  display: none;
+  
+  border-bottom-left-radius: .2rem;
+  box-shadow: -5px 5px 4px rgba(19, 23, 27, 0.548);
+  transition: ease-in 1s;
+  z-index: 1000;
+  
+  
+  & > ul {
+    text-align: left;
+    margin-left: 1rem;
+    list-style-type: none;
+    
+    & > li {
+      padding: .5rem 0;
+      
+      &:not(:last-of-type){
+        border-bottom: 1px solid gray;
+      }
+    }
+  }
+}
+
 header {
   
   position: sticky;

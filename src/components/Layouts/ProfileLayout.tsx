@@ -35,7 +35,6 @@ const ProfileLayout = (props: userProps) => {
     setUserReviews(data);
   }
 
-  console.log(props.user)
 
   useEffect(() => {
     if (!props.user || !props.token || !props.setToken || !props.setUser) navigate('/');
@@ -123,10 +122,10 @@ const ProfileLayout = (props: userProps) => {
         <div>
         </div>
         <div className={styles.rightContainer}>
-          <header>
+          <div>
             <h1>{props.user.username}</h1>
             <h1>( {props.user.country} )</h1>
-          </header>
+          </div>
           <div className={styles.about}>
             <p>{props.user?.description}</p>
             <hr />

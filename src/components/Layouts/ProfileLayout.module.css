@@ -1,7 +1,6 @@
 .profileBento > section{
-    background-color: rgb(19, 19, 19);
+    background-color: rgb(5, 5, 5);
     min-width: 90%;
-    /* background-color: transparent; */
     display: flex;
     padding: 1.5rem;
 
@@ -34,6 +33,15 @@
         border: 1px solid rgba(255, 255, 255, 0.144);
         flex-grow: 1;
         flex-shrink: 1;
+
+        & >:first-child{
+            background-color: #202023;
+            display: flex;
+            justify-content: space-around;
+            padding: .5rem 0;
+            width: 100%;
+        }
+
     }
 }
 
@@ -52,6 +60,9 @@
   
 }
 
+header {
+    z-index: 0;
+} 
 .profileArticle{
 
     & > header {
@@ -62,6 +73,7 @@
         justify-content: start;
         padding-left: 1rem;
         gap: .5rem;
+
     }
 
     & .profileContent {

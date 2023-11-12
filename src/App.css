@@ -6,8 +6,7 @@
 
 
 main{
-  /* background-color: var(--dark); */
-  /* z-index: -100; */
+  background-color: var(--dark);
   color: var(--light);
   & section{
     min-width: 100vw;
@@ -70,4 +69,8 @@ main{
 /* APLICAR APÓS SCROLL */
 & .addShadow{
   animation: tweakColor 5s ease-in-out 0s infinite alternate;
+}
+
+.open{
+  display: inline !important;
 }
