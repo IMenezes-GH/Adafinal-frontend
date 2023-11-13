@@ -90,3 +90,45 @@ background-color: rgb(30, 29, 36);
     }
   }
   
+
+.reviewList{
+    list-style-type: none;
+
+    & li {
+        display: grid;
+        padding: 1rem;
+        background-color: black;
+        border: 1px solid rgba(128, 128, 128, 0.219);
+        
+        & article {
+
+            border: 1px solid rgba(128, 128, 128, 0.062);
+            background-color: rgb(17, 17, 17);
+            padding: 1rem;
+        }
+        
+        & h1 {
+            padding: .5rem;
+            background-color: rgb(12, 11, 11);
+            border: 1px solid rgba(128, 128, 128, 0.219);    
+            display: flex;
+            justify-content: space-between;
+
+            & > a{
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                &:hover{
+                    color:rgb(0, 225, 255);
+                }
+            }
+        }
+
+        & p {
+            border: 1px solid rgba(128, 128, 128, 0.219);
+            min-height: 5vh;
+            padding: 1rem;
+
+        }
+    }
+}

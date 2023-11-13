@@ -4,6 +4,7 @@ import styles from './GamePage.module.css'
 import { requestAPI } from '../api/fetchData'
 import Dialog from './Dialog/Dialog'
 import { Link } from 'react-router-dom'
+import profileIcon from '../assets/profile-icon.svg'
 
 interface IProps{
     user: User,
@@ -71,16 +72,15 @@ const GamePage = (props: IProps) => {
                 </div>
             </section>
             <section className={styles.reviewContainer}>
-                <ul>
+                <ul className={styles.reviewList}>
                     {ratings.length > 0 && ratings.map((rating: Rating, index) =>{
                         return (
                             <li key={index}>
                                 <article>
-                                <h1>{rating.description}</h1>
-                                <p><Link to={`/profile/${rating.user}`}>Autor</Link></p>
-                                Nota: {rating.score}/5
+                                    <h1><Link to={`/profile/${rating.user}`}><img src={profileIcon} alt="" /> Autor (id:{rating.user})</Link><span>Nota: {rating.score}/5</span></h1>
+                                    <p>{rating.description}</p>
                                 </article>
-                                </li>
+                            </li>
                         )
                     })}
                     {ratings.length === 0 && 
