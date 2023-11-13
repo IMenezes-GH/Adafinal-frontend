@@ -15,9 +15,9 @@ export const NewsCard = (props: INewsCard) => {
       <article className={styles.card}>
    
         <div>
-          {props.num !== 0 ?  <button id='leftArrow' type='button' value='subtract' onClick={(ev) => props.handleClick(ev)}>⮜</button> : <span></span>}
+          {props.num !== 0 ?  <button id='leftArrow' type='button' value='subtract' onClick={(ev) => props.handleClick(ev)}>⮜</button> : <div></div>}
           <span>{props.data.content}</span>
-          {props.num !== 4 ? <button id='RightArrow' type='button' value='add' onClick={(ev) => props.handleClick(ev)}>⮞</button>: <span></span>}
+          {props.num !== 4 ? <button id='RightArrow' type='button' value='add' onClick={(ev) => props.handleClick(ev)}>⮞</button>: <div></div>}
         </div>
       </article>
     )
