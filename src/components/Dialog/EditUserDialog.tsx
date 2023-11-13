@@ -13,7 +13,6 @@ const EditUserDialog = ({title, isOpen, setIsOpen, children}: props) => {
   const modal = useRef<HTMLDialogElement>(null);
   
   useEffect(() => {
-    console.log(isOpen)
     if (isOpen) {
       modal.current?.showModal();
     }

@@ -16,7 +16,6 @@ import { refreshAPI } from './api/fetchData'
 import Logout from './components/Logout'
 import GamesPage from './components/GamePage'
 
-const FETCH_URL = 'http://localhost:3000'
 
 function App() {
   
@@ -29,7 +28,7 @@ function App() {
     const jwt = token && (jwtDecode(token))
     const current_time = new Date().getTime() / 1000;
     if (!jwt || current_time > jwt.exp!) {
-      const data = (async () => await refreshAPI(FETCH_URL))();
+      const data = (async () => await refreshAPI())();
       data.then((d) => { // OBS: STRICT MODE BREAKS THIS
         if (d.ok){
           setUser(d.data.user)

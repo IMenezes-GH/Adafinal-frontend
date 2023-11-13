@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styles from './GamePage.module.css'
+import requestAPI, { requestData } from '../api/fetchData'
 
-
-const URL = 'http://localhost:3000'
 
 const GamePage = () => {
 
@@ -12,23 +11,26 @@ const GamePage = () => {
     const [ratings, setRatings] = useState([]);
 
     const fetchGame = async() => {
-        const response = await fetch(URL + '/games/' + param.gameid);
+        const response = await requestData('/games/' + param.gameid);
         const data = await response.json();
-
         setGame(data)
     }
 
     const fetchReviews = async() => {
-        const response = await fetch(URL + '/ratings?game=' + param.gameid);
+        const response = await requestData('/ratings?game=' + param.gameid);
         const data = await response.json();
 
         setRatings(data)
     }
 
+    const addReviews = async() => {
+        // const response = await requestAPI()
+    }
+
     useEffect(() => {
         fetchGame()
         fetchReviews()
-        console.log(game, ratings)
+        // console.log(game, ratings)
     }, [])
 
   return (
@@ -48,9 +50,9 @@ const GamePage = () => {
             </section>
             <section className={styles.reviewContainer}>
                 <ul>
-                    {ratings.length > 0 && ratings.map((rating, index) =>{
+                    {ratings.length > 0 && ratings.map((rating: Rating, index) =>{
                         return (
-                            <li key={index}>rating.score</li>
+                            <li key={index}>{rating.score}</li>
                         )
                     })}
                     {ratings.length === 0 && 

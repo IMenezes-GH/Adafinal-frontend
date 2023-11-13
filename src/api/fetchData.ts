@@ -1,7 +1,18 @@
-const requestAPI = async(url: string, options: RequestInit, errorMessage = '100') => {
+const BASE_URL = 'http://localhost:3000'
+
+export const requestData = async(slug: string) => {
+
+    const response = await fetch(BASE_URL + slug);
+    if (!response.ok) throw new Error(`Algo deu errado. Por favor recarregue a página e tente novamente.`)
+    return response
+
+}
+
+
+const requestAPI = async(slug: string, options: RequestInit, errorMessage = '100') => {
 
     try {
-        const response = await fetch(url, options);
+        const response = await fetch(BASE_URL + slug, options = {});
         if (!response.ok) throw new Error(`Algo deu errado. Por favor recarregue a página e tente novamente.`)
 
     }
@@ -16,9 +27,9 @@ const requestAPI = async(url: string, options: RequestInit, errorMessage = '100'
     }
 }
 
-export const refreshAPI = async(url: string) => {
+export const refreshAPI = async() => {
 
-    const response = await fetch(url + '/auth/refresh', {
+    const response = await fetch(BASE_URL + '/auth/refresh', {
         method: 'GET',
         mode: 'cors',
         credentials: 'include',
@@ -37,9 +48,9 @@ interface login {
     password: string
 }
 
-export const loginAPI = async(url: string, loginData: login) => {
+export const loginAPI = async(loginData: login) => {
 
-    const response = await fetch(url + '/auth/login', {
+    const response = await fetch(BASE_URL + '/auth/login', {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',

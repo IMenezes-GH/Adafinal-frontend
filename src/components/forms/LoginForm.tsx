@@ -4,7 +4,6 @@ import {loginAPI} from '../../api/fetchData'
 import { FormEvent, useState } from 'react'
 
 // const URL: string = 'https://adafinal-backend.vercel.app'
-const URL: string = 'http://localhost:3000'
 
 const LoginForm = (props: userProps) => {
 
@@ -20,7 +19,7 @@ const LoginForm = (props: userProps) => {
       password: target.password.value
     }
 
-    const login = await loginAPI(URL, loginData);
+    const login = await loginAPI(loginData);
     document.body.style.cursor = 'wait'
 
     setMessage(login.data.message);

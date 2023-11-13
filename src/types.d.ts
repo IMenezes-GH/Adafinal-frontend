@@ -25,7 +25,7 @@ type User = {
     profileImageURL?: string,
 }
 
-type Review = {
+type Rating = {
     id: string,
     game: string,
     user: string,
@@ -39,4 +39,3 @@ interface userProps {
     token: string,
     setToken: CallableFunction
 }
-

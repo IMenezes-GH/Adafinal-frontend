@@ -10,12 +10,12 @@
 
 }
 
-@media screen and (prefers-color-scheme: light) {
+/* @media screen and (prefers-color-scheme: light) {
   :root{
-    --bg-color: #D5D7D9;
-    --txt-color:  #232323;
+    --bg-color: #19191a;
+    --txt-color:  #ffffff;
   }
-}
+} */
 
 * {
   margin: 0;
