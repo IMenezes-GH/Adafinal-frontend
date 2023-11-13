@@ -1,4 +1,4 @@
-import styles from './RegisterForm.module.css'
+import styles from './Form.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import {loginAPI} from '../../api/fetchData'
 import { FormEvent, useState } from 'react'

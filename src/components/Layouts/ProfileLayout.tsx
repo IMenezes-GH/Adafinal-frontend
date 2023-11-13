@@ -31,7 +31,6 @@ const ProfileLayout = (props: userProps) => {
   const params = useParams();
 
   const navigate = useNavigate();
-
   
   const getUserRatings = async () => {
     if (profile._id){
@@ -47,6 +46,8 @@ const ProfileLayout = (props: userProps) => {
   }
 
   useEffect(() => {
+
+    if (!params.userid && !props.user._id) navigate('/login');
     
     if (!params.userid || params.userid === props.user._id){
       setIsUserProfile(true);

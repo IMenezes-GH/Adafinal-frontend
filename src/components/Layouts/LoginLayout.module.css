@@ -1,15 +1,16 @@
 .loginPage{
-    background-image: url('/boris-langvand-XJs1pH6wftw-unsplash.jpg');
+    background-image: url('/photo-1579567761406-4684ee0c75b6.avif');
     /* background: linear-gradient(rgb(8, 8, 26), rgba(39, 9, 9, 0.486)); */
     background-size: cover;
     background-repeat: no-repeat;
-    height: 90vh;
+    height: 100vh;
+    display: flex;
     overflow-x: hidden;
 }
 
 .loginNav{
     display: flex;
-
+    background-color: #0E0E11;
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
@@ -18,10 +19,12 @@
         padding: 0 1rem;
         flex-grow: 1;
         text-align: center;
-        border: 2px solid white;
+        border: 1px solid #202023;
+        padding: 1rem 0;
+        border-bottom: none;
+
         &:hover{
             background-color: rgb(255, 255, 255);
-            border: 2px solid rgb(255, 255, 255);
             color: rgb(15, 92, 122);
             cursor: pointer;
         }

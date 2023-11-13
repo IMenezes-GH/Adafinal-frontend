@@ -1,6 +1,6 @@
 import {useState, FormEvent, ChangeEvent} from 'react'
 import {requestAPI} from '../../api/fetchData';
-import styles from './RegisterForm.module.css'
+import styles from './Form.module.css'
 import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {

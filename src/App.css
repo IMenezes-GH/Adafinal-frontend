@@ -13,7 +13,7 @@ main{
   }
 
   & .hero{
-    background-image: url('public/brendan-miranda-OwTA4466nSI-unsplash.jpg');
+    background-image: url('./photo-1579567761406-4684ee0c75b6.avif');
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: 0 -20rem;
