@@ -53,7 +53,7 @@ const GamesList = () => {
             </ul>
           </div>
           <div>
-            <h2>Recommendados para você</h2>
+            <h2>Recomendados para você</h2>
             <ul className={styles.recommended}>
             {isLoaded ? gameList.map((game: Game, index) => {
                 return (

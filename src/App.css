@@ -111,3 +111,39 @@ main{
   color: yellow;
   font-weight: 600;
 }
+
+.newsdiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  background: radial-gradient(rgb(26, 25, 25), black);
+
+  & > div {
+    width: 70%;
+    margin: 5rem auto;
+  }
+
+  & p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 2.5rem 0;
+    text-align: justify;
+  }
+  
+}
+
+.div-placeholder{
+  background-color: rgb(32, 32, 32);
+  box-sizing: border-box;
+  border-radius: .2rem;
+  min-width: 10rem;
+  min-height: 10rem;
+  display: grid;
+
+  & > p {
+    font-size: 2rem;
+    width: 80%;
+    margin: auto;
+  }
+}
