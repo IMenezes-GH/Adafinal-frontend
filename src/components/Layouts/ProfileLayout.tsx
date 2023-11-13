@@ -90,7 +90,7 @@ const ProfileLayout = (props: userProps) => {
             {props.user.profileImageURL && <div style={{backgroundImage: `url(${props.user.profileImageURL})`}} className={styles.profilePicture}></div> }
             {!props.user.profileImageURL && <div style={{backgroundImage: `url(${props.user.profileImageURL})`}} className={styles.profilePicture}></div> }
             <article className={styles.profileArticle}>
-              <header><span>{props.user.active ? '⬤' : '◯'}</span><span>{props.user.username}</span></header>
+              <header><span>{props.user.active ? '⬤' : '◯'}</span><span className={props.user.roles === 'admin' ? 'admin' : ''}>{props.user.username}</span></header>
               <div className={styles.profileContent}>
                 <p>{props.user.country}</p>
                 <p>{props.user.name}</p>

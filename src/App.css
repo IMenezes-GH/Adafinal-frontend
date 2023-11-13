@@ -99,3 +99,15 @@ main{
   display: inline !important;
 }
 
+
+.hr-blue{
+  border: none;
+  border-bottom: .2rem dotted #4798ca;
+  width: 50%;
+  margin: auto;
+}
+
+.admin{
+  color: yellow;
+  font-weight: 600;
+}

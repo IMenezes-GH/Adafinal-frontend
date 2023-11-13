@@ -15,7 +15,7 @@ import { jwtDecode } from 'jwt-decode'
 import { refreshAPI } from './api/fetchData'
 import Logout from './components/Logout'
 import GamesPage from './components/GamePage'
-
+import Footer from './components/Footer'
 
 function App() {
   
@@ -47,6 +47,7 @@ function App() {
         <Header user={user} setUser={setUser} token={token}/>
       </div>
       <Outlet />
+      <Footer user={user}/>
       </>
     )
   }
