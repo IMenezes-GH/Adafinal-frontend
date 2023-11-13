@@ -46,8 +46,8 @@ const Header = (props: userProps) => {
           <ul>
               <li><Link to={'/'}>Notícias</Link></li>
               <li><Link to={'games'}>Jogos</Link></li>
-              <li><Link to={'ranking'}>Ranking</Link></li>
-              <li><Link to={'forum'}>Forum</Link></li>
+              {/* <li><Link to={'ranking'}>Ranking</Link></li> */}
+              {/* <li><Link to={'forum'}>Forum</Link></li> */}
               <li><Link to={props.token ? 'profile' : 'login'}>Perfil</Link></li>
           </ul>
       </nav>
