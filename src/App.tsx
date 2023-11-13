@@ -57,12 +57,25 @@ function App() {
       <Route path={"/"} element={<Layout />}>
         <Route index element={<NewsLayout/>} />
         <Route path={"games"} element={<GamesLayout />} />
-        <Route path={"profile"} element={<ProfileLayout token={token} user={user} setUser={setUser} setToken={setToken}/>} />
         <Route path={"forum"} element={<ForumLayout />} />
         <Route path={"ranking"} element={<RankingLayout />} />
-        <Route path={'logout'} element={<Logout />} />
+        <Route path={"profile"} 
+        element={<ProfileLayout 
+          user={user} 
+          setUser={setUser} 
+          token={token} 
+          setToken={setToken}/>} />
+        <Route path={'logout'} 
+          element={<Logout 
+          setToken={setToken} 
+          setUser={setUser}/>} />
         <Route path={"login"} element={<LoginLayout />} >
-          <Route index element={<LoginForm token={token} setToken={setToken} user={user} setUser={setUser} />} />
+          <Route index 
+          element={<LoginForm 
+          user={user} 
+          setUser={setUser} 
+          token={token} 
+          setToken={setToken}/>} />
           <Route path={'register'} element={<RegisterForm />} />
         </Route>
       </Route>
