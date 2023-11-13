@@ -5,7 +5,7 @@ import NewsLayout from './components/Layouts/NewsLayout'
 import LoginLayout from './components/Layouts/LoginLayout'
 import LoginForm from './components/forms/LoginForm'
 import RegisterForm from './components/forms/RegisterForm'
-import GamesLayout from './components/Layouts/GamesLayout'
+import GamesList from './components/GamesList'
 import RankingLayout from './components/Layouts/RankingLayout'
 import ForumLayout from './components/Layouts/ForumLayout'
 import ProfileLayout from './components/Layouts/ProfileLayout'
@@ -57,7 +57,7 @@ function App() {
     <Routes>
       <Route path={"/"} element={<Layout />}>
         <Route index element={<NewsLayout/>} />
-        <Route path={"games"} element={<GamesLayout />} />
+        <Route path={"games"} element={<GamesList />} />
         <Route path={"/games/:gameid"} element={<GamesPage token={token} user={user}/>}/>
         <Route path={"forum"} element={<ForumLayout />} />
         <Route path={"ranking"} element={<RankingLayout />} />

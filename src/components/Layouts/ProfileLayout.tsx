@@ -30,7 +30,7 @@ const ProfileLayout = (props: userProps) => {
 
   const params = useParams();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   
   const getUserRatings = async () => {
@@ -155,7 +155,7 @@ const ProfileLayout = (props: userProps) => {
             <p>{profile?.description}</p>
             <hr />
             <div className={styles.banner}>
-              <p>{!profile.banner && 'Escolha um banner para seu perfil'}</p>
+              {/* BANNER */}
             </div>
           </div>
         </div>
