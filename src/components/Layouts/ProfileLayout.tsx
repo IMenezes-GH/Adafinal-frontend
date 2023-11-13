@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react';
 import styles from './ProfileLayout.module.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Dialog from '../Dialog/Dialog';
 import { requestAPI } from '../../api/fetchData';
 
@@ -24,22 +24,46 @@ const ProfileLayout = (props: userProps) => {
   const [userReviews, setUserReviews] = useState([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState('');
+  
+  const [profile, setProfile] = useState(props.user);
+  const [isUserProfile, setIsUserProfile] = useState(false);
 
-  const navigate = useNavigate();
+  const params = useParams();
 
+  // const navigate = useNavigate();
+
+  
   const getUserRatings = async () => {
-    if (props.user.id){
-      const {message} = await requestAPI('/ratings?user=' + props.user.id);
+    if (profile._id){
+      const {message} = await requestAPI('/ratings?user=' + profile._id);
     
       setUserReviews(message);
     }
   }
-
+  
+  const getUser = async () => {
+    const {message, response} = await requestAPI('/users?id=' + params.userid)
+    return {message, response};
+  }
 
   useEffect(() => {
-    if (!props.user || !props.token || !props.setToken || !props.setUser) navigate('/');
+    console.log(params, profile, props.user)
+    
+    if (!params.userid || params.userid === props.user._id){
+      setIsUserProfile(true);
+      setProfile(props.user);
+    }
+    else {
+      getUser().then((res) => {
+        if (!res.response.ok) return;
+        setIsUserProfile(false);
+        setProfile(res.message);
+      });
+    }
+    
+    // if (!profile || !props.token || !props.setToken || !props.setUser) navigate('/');
     getUserRatings()
-  }, [])
+  }, [isUserProfile, profile])
 
   const handleEditProfile = async () => {
     setIsOpen(true)
@@ -50,15 +74,15 @@ const ProfileLayout = (props: userProps) => {
     const target = ev.target as HTMLFormElement;
 
 
-    if (!props.user || !props.token) return;
+    if (!profile || !props.token) return;
 
     const data = {
-      id: props.user.id,
-      email: target.email.value || props.user.email,
-      name: target.fullName.value || props.user.name,
-      username: target.username.value || props.user.username,
-      description: target.description.value || props.user.description,
-      profileImageURL: target.profileImageURL.value || props.user.profileImageURL,
+      id: profile._id,
+      email: target.email.value || profile.email,
+      name: target.fullName.value || profile.name,
+      username: target.username.value || profile.username,
+      description: target.description.value || profile.description,
+      profileImageURL: target.profileImageURL.value || profile.profileImageURL,
     }
 
     const {response, message} = await requestAPI('/users', {
@@ -87,18 +111,20 @@ const ProfileLayout = (props: userProps) => {
         <div className={styles.leftContainer}>
           <div>
             {/* <div className={styles.profilePicture}></div> */}
-            {props.user.profileImageURL && <div style={{backgroundImage: `url(${props.user.profileImageURL})`}} className={styles.profilePicture}></div> }
-            {!props.user.profileImageURL && <div style={{backgroundImage: `url(${props.user.profileImageURL})`}} className={styles.profilePicture}></div> }
+            {profile.profileImageURL && <div style={{backgroundImage: `url(${profile.profileImageURL})`}} className={styles.profilePicture}></div> }
+            {!profile.profileImageURL && <div style={{backgroundImage: `url(${profile.profileImageURL})`}} className={styles.profilePicture}></div> }
             <article className={styles.profileArticle}>
-              <header><span>{props.user.active ? '⬤' : '◯'}</span><span className={props.user.roles === 'admin' ? 'admin' : ''}>{props.user.username}</span></header>
+              <header><span>{profile.active ? '⬤' : '◯'}</span><span className={profile.roles === 'admin' ? 'admin' : ''}>{profile.username}</span></header>
               <div className={styles.profileContent}>
-                <p>{props.user.country}</p>
-                <p>{props.user.name}</p>
-                <p>{props.user.email}</p>
+                <p>{profile.country}</p>
+                <p>{profile.name}</p>
+                <p>{profile.email}</p>
               </div>
             </article>
             <hr />
-            <button onClick={handleEditProfile} className={styles.editProfile}>Editar Perfil</button>
+            {isUserProfile && 
+              <button onClick={handleEditProfile} className={styles.editProfile}>Editar Perfil</button>
+            }
           </div>
           <div className={styles.reviewsContainer}>
             <h3>Últimos reviews:</h3>
@@ -122,14 +148,14 @@ const ProfileLayout = (props: userProps) => {
         </div>
         <div className={styles.rightContainer}>
           <div>
-            <h1>{props.user.username}</h1>
-            <h1>( {props.user.country} )</h1>
+            <h1>{profile.username}</h1>
+            <h1>( {profile.country} )</h1>
           </div>
           <div className={styles.about}>
-            <p>{props.user?.description}</p>
+            <p>{profile?.description}</p>
             <hr />
             <div className={styles.banner}>
-              <p>{!props.user.banner && 'Escolha um banner para seu perfil'}</p>
+              <p>{!profile.banner && 'Escolha um banner para seu perfil'}</p>
             </div>
           </div>
         </div>

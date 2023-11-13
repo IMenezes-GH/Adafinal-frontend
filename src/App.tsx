@@ -67,6 +67,12 @@ function App() {
           setUser={setUser} 
           token={token} 
           setToken={setToken}/>} />
+          <Route path={"/profile/:userid"} 
+        element={<ProfileLayout 
+          user={user} 
+          setUser={setUser} 
+          token={token} 
+          setToken={setToken}/>} />
         <Route path={'logout'} 
           element={<Logout 
           setToken={setToken} 

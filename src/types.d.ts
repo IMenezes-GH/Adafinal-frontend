@@ -11,7 +11,7 @@ type Game = {
 }
 
 type User = {
-    id?: string,
+    _id?: string,
     description?: string,
     state?: string,
     active?: boolean,

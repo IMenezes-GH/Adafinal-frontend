@@ -34,7 +34,7 @@ const GamePage = (props: IProps) => {
             game: param.gameid,
             description: target.description.value,
             score: Number(target.score.value),
-            user: props.user.id
+            user: props.user._id
         }
         await requestAPI('/ratings', {
             method: 'POST',
@@ -73,12 +73,12 @@ const GamePage = (props: IProps) => {
             <section className={styles.reviewContainer}>
                 <ul>
                     {ratings.length > 0 && ratings.map((rating: Rating, index) =>{
-                        console.log(rating.user)
+                        console.log(ratings);
                         return (
                             <li key={index}>
                                 <article>
                                 <h1>{rating.description}</h1>
-                                <p><Link to={`/user/${rating.id}`}>Autor</Link></p>
+                                <p><Link to={`/profile/${rating.user}`}>Autor</Link></p>
                                 Nota: {rating.score}/5
                                 </article>
                                 </li>
