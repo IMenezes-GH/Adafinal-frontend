@@ -3,8 +3,11 @@ import styles from './GamesList.module.css'
 import { Link } from "react-router-dom";
 import { requestAPI } from "../api/fetchData";
 
-const GamesList = () => {
+interface Props {
+  category: Category[]
+}
 
+const GamesList = (props: Props) => {
 
   const [gameList, setGameList] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);

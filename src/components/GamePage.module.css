@@ -24,13 +24,22 @@
   }
 
   .gameDescription{
-    height: 20vh;
+    height: 30vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     margin: 0 auto;
     width: 70%;
     text-align: justify;
+
+    & a {
+        color: rgb(58, 157, 250);
+        font-weight: 600;
+        &:hover{
+            text-decoration: underline;
+            color: white;
+        }
+    }
   }
 
 .reviewContainer{

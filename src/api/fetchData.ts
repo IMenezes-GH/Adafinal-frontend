@@ -1,4 +1,5 @@
-const BASE_URL = 'http://localhost:3000'
+export const BASE_URL = 'http://localhost:3000'
+
 
 export const requestAPI = async(slug: string, options?: RequestInit) => {
 
@@ -43,4 +44,10 @@ export const loginAPI = async(loginData: login) => {
     const data = await response.json();
     return {ok: response.ok, data}
 
+}
+
+export const getCategories = async () => {
+    const response = await fetch(BASE_URL + '/category');
+    const message = await response.json()
+    return {response, message}
 }

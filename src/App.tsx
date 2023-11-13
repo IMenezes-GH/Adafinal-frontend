@@ -9,6 +9,7 @@ import GamesList from './components/GamesList'
 import RankingLayout from './components/Layouts/RankingLayout'
 import ForumLayout from './components/Layouts/ForumLayout'
 import ProfileLayout from './components/Layouts/ProfileLayout'
+import { BASE_URL } from './api/fetchData'
 
 import { useEffect, useState } from 'react'
 import { jwtDecode } from 'jwt-decode'
@@ -21,10 +22,18 @@ function App() {
   
   const [user, setUser] = useState<User>({username: '', name: '', description: '', state: '', country: ''});
   const [token, setToken] = useState('');
-
+  const [category, setCategory] = useState<Category[]>([]);
   
+  const loadCategories = async() => {
+    const response = await fetch(BASE_URL + '/category');
+    const message = await response.json()
+    setCategory(message);
+  }
+
   useEffect(() => {
  
+    loadCategories();
+    
     const jwt = token && (jwtDecode(token))
     const current_time = new Date().getTime() / 1000;
     if (!jwt || current_time > jwt.exp!) {
@@ -37,7 +46,7 @@ function App() {
       })
     }
     
-  })
+  }, [])
   
   const Layout = () => {
     
@@ -57,8 +66,8 @@ function App() {
     <Routes>
       <Route path={"/"} element={<Layout />}>
         <Route index element={<NewsLayout/>} />
-        <Route path={"games"} element={<GamesList />} />
-        <Route path={"/games/:gameid"} element={<GamesPage token={token} user={user}/>}/>
+        <Route path={"games"} element={<GamesList category={category} />} />
+        <Route path={"/games/:gameid"} element={<GamesPage category={category} token={token} user={user}/>}/>
         <Route path={"forum"} element={<ForumLayout />} />
         <Route path={"ranking"} element={<RankingLayout />} />
         <Route path={"profile"} 

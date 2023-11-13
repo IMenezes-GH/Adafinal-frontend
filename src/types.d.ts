@@ -33,6 +33,13 @@ type Rating = {
     score: number,
 }
 
+type Category = {
+    _id?: string,
+    id?: string,
+    name: string,
+    active: boolean
+}
+
 interface userProps {
     user: User,
     setUser: CallableFunction

@@ -8,7 +8,8 @@ import profileIcon from '../assets/profile-icon.svg'
 import fullStar from '../assets/star_full.svg'
 interface IProps{
     user: User,
-    token: string
+    token: string,
+    category: Category[]
 }
 
 interface IStarProps {
@@ -23,8 +24,8 @@ const Stars = (props: IStarProps) => {
     }
 
     return(
-     fullStars.map(() => {
-        return (<img src={fullStar} />)
+     fullStars.map((index) => {
+        return (<img key={index} src={fullStar} />)
      })   
     )
 }
@@ -38,6 +39,8 @@ const GamePage = (props: IProps) => {
     
     const fetchGame = async() => {
         const {message} = await requestAPI('/games/' + param.gameid);
+        const categoryObject = props.category.filter((cat: Category) => cat._id === message.category)[0]
+        message.category = categoryObject.name;
         setGame(message)
     }
 
@@ -80,13 +83,14 @@ const GamePage = (props: IProps) => {
         <>
             <section>
                 <div className={styles.gameBanner} role="image" style={{backgroundImage: `url(${game.imageURL})`}}>
-                    <h1 className='title'>{game.name} <span>Nota: {game.score}/5</span></h1>
+                    <h1 className='title'>{game.name} </h1>
                 </div>
                 <div className={styles.gameDescription}>
-
-                <h1><span>{game.name}</span></h1>
-                <p>{game.description}</p>
-                <a href={game.url}>Link para o jogo</a>
+                    <h1><span>{game.name}</span></h1>
+                    <p>Categoria: {game.category}</p>
+                    <p>{game.description}</p>
+                    <hr />
+                    <a href={game.url}>Link para o jogo</a>
                 </div>
             </section>
             <section className={styles.reviewContainer}>
@@ -108,23 +112,23 @@ const GamePage = (props: IProps) => {
                     { ratings.findIndex((rating: Rating) => rating.user === props.user._id) === -1 &&
 
                         <div className={styles.emptyContainer}>
-                    {ratings.length === 0 ?
-                    <>
-                        <h2>
-                            Esse jogo não possui avaliações.
-                        </h2>
-                        <button onClick={() => setIsOpen(true)}>Seja o primeiro a avaliar!</button>
-                    </>
-                    
-                    :
+                        {ratings.length === 0 ?
+                        <>
+                            <h2>
+                                Esse jogo não possui avaliações.
+                            </h2>
+                            <button onClick={() => setIsOpen(true)}>Seja o primeiro a avaliar!</button>
+                        </>
+                        
+                        :
 
-                    <>
-                    <h2>
-                        Você ainda não avaliou esse jogo.
-                    </h2>
-                        <button onClick={() => setIsOpen(true)}>Avaliar esse jogo</button>
-                    </>
-                    }
+                        <>
+                        <h2>
+                            Você ainda não avaliou esse jogo.
+                        </h2>
+                            <button onClick={() => setIsOpen(true)}>Avaliar esse jogo</button>
+                        </>
+                        }
                     </div>
                     }
                 </ul>
