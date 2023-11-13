@@ -1,15 +1,14 @@
 import { FormEvent, useEffect, useState } from 'react';
 import styles from './ProfileLayout.module.css';
 import { Link, useNavigate } from 'react-router-dom';
-import EditUserDialog from '../Dialog/EditUserDialog';
+import Dialog from '../Dialog/Dialog';
+import { requestData } from '../../api/fetchData';
 
 interface IReview {
   title: string,
   score: number,
   link: string
 }
-
-const URL = 'http://localhost:3000';
 
 
 const ReviewItem = (props:IReview) => {
@@ -29,7 +28,7 @@ const ProfileLayout = (props: userProps) => {
   const navigate = useNavigate();
 
   const getUserRatings = async () => {
-    const response = await fetch(URL + '/ratings?user=' + props.user.id);
+    const response = await requestData('/ratings?user=' + props.user.id);
     const data = await response.json();
 
     setUserReviews(data);
@@ -106,7 +105,7 @@ const ProfileLayout = (props: userProps) => {
             <hr />
             <ul className={styles.profileReviewsList}>
               { 
-               userReviews.length > 1 && userReviews.map((review: Review, index) => {
+               userReviews.length > 1 && userReviews.map((review: Rating, index) => {
                   return (
                     <ReviewItem 
                       key={index} 
@@ -136,7 +135,7 @@ const ProfileLayout = (props: userProps) => {
         </div>
       </section>
 
-      <EditUserDialog title={'Editar perfil'} isOpen={isOpen} setIsOpen={setIsOpen}>
+      <Dialog title={'Editar perfil'} isOpen={isOpen} setIsOpen={setIsOpen}>
         <p>Preencha apenas os dados que serão atualizados</p>
         <form onSubmit={(ev: FormEvent) => submitModal(ev)}>
           <div className='row'>
@@ -165,7 +164,7 @@ const ProfileLayout = (props: userProps) => {
             <button type='submit'>Atualizar</button>
           </div>
         </form>
-      </EditUserDialog>
+      </Dialog>
     </main>
   )
 }

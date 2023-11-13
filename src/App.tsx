@@ -57,7 +57,7 @@ function App() {
       <Route path={"/"} element={<Layout />}>
         <Route index element={<NewsLayout/>} />
         <Route path={"games"} element={<GamesLayout />} />
-        <Route path={"/games/:gameid"} element={<GamesPage/>}/>
+        <Route path={"/games/:gameid"} element={<GamesPage token={token} user={user}/>}/>
         <Route path={"forum"} element={<ForumLayout />} />
         <Route path={"ranking"} element={<RankingLayout />} />
         <Route path={"profile"} 

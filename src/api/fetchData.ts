@@ -10,9 +10,10 @@ export const requestData = async(slug: string) => {
 
 
 const requestAPI = async(slug: string, options: RequestInit, errorMessage = '100') => {
-
     try {
-        const response = await fetch(BASE_URL + slug, options = {});
+        const response = await fetch(BASE_URL + slug, options);
+        const message = await response.json()
+        console.log(response, message)
         if (!response.ok) throw new Error(`Algo deu errado. Por favor recarregue a página e tente novamente.`)
 
     }

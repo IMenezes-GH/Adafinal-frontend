@@ -9,7 +9,7 @@ interface props {
 }
 
 
-const EditUserDialog = ({title, isOpen, setIsOpen, children}: props) => {
+const Dialog = ({title, isOpen, setIsOpen, children}: props) => {
   const modal = useRef<HTMLDialogElement>(null);
   
   useEffect(() => {
@@ -29,4 +29,4 @@ const EditUserDialog = ({title, isOpen, setIsOpen, children}: props) => {
   )
 }
 
-export default EditUserDialog
+export default Dialog
