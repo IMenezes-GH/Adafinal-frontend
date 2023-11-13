@@ -14,7 +14,7 @@ interface IReview {
 const ReviewItem = (props:IReview) => {
   return (
     <li className={styles.reviewLink}>
-        <Link to={"review"}><span>{props.title}</span> - <span>{props.score}/5</span></Link>
+        <Link to={`/games/${props.link}`}><span>{props.title}</span> - <span>{props.score}/5</span></Link>
     </li>
   )
 }
@@ -28,10 +28,12 @@ const ProfileLayout = (props: userProps) => {
   const navigate = useNavigate();
 
   const getUserRatings = async () => {
-    const response = await requestData('/ratings?user=' + props.user.id);
-    const data = await response.json();
-
-    setUserReviews(data);
+    if (props.user.id){
+      console.log(props.user.id)
+      const response = await requestData('/ratings?user=' + props.user.id);
+      const data = await response.json();
+      setUserReviews(data);
+    }
   }
 
 
@@ -39,7 +41,6 @@ const ProfileLayout = (props: userProps) => {
     if (!props.user || !props.token || !props.setToken || !props.setUser) navigate('/');
     getUserRatings()
   }, [])
-  // getUserRatings();
 
   const handleEditProfile = async () => {
     setIsOpen(true)
@@ -105,12 +106,12 @@ const ProfileLayout = (props: userProps) => {
             <hr />
             <ul className={styles.profileReviewsList}>
               { 
-               userReviews.length > 1 && userReviews.map((review: Rating, index) => {
+               userReviews.length >= 1 && userReviews.map((review: Rating, index) => {
                   return (
                     <ReviewItem 
                       key={index} 
-                      link='/' 
-                      title={review.game} 
+                      link={review.game}
+                      title={review.description.length > 12 ? review.description.substring(0,12) + '(...)' : review.description} 
                       score={review.score}/>
                       )})}
               {userReviews.length === 0 && <p>Esse usuário não possui reviews</p>}
