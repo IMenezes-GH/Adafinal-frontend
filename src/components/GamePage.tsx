@@ -30,12 +30,12 @@ const Stars = (props: IStarProps) => {
 }
 
 const GamePage = (props: IProps) => {
-
+    
     const param = useParams();
     const [game, setGame] = useState<Game>();
     const [ratings, setRatings] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
-
+    
     const fetchGame = async() => {
         const {message} = await requestAPI('/games/' + param.gameid);
         setGame(message)
@@ -105,15 +105,19 @@ const GamePage = (props: IProps) => {
                             </li>
                         )
                     })}
-                    <div className={styles.emptyContainer}>
-                    {ratings.length === 0 ? 
+                    { ratings.findIndex((rating: Rating) => rating.user === props.user._id) === -1 &&
+
+                        <div className={styles.emptyContainer}>
+                    {ratings.length === 0 ?
                     <>
                         <h2>
                             Esse jogo não possui avaliações.
                         </h2>
                         <button onClick={() => setIsOpen(true)}>Seja o primeiro a avaliar!</button>
                     </>
+                    
                     :
+
                     <>
                     <h2>
                         Você ainda não avaliou esse jogo.
@@ -122,6 +126,7 @@ const GamePage = (props: IProps) => {
                     </>
                     }
                     </div>
+                    }
                 </ul>
             </section>
             <Dialog title={'Criar Review'} isOpen={isOpen} setIsOpen={setIsOpen}>
