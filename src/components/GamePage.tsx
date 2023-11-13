@@ -5,10 +5,28 @@ import { requestAPI } from '../api/fetchData'
 import Dialog from './Dialog/Dialog'
 import { Link } from 'react-router-dom'
 import profileIcon from '../assets/profile-icon.svg'
-
+import fullStar from '../assets/star_full.svg'
 interface IProps{
     user: User,
     token: string
+}
+
+interface IStarProps {
+    score: number
+}
+
+const Stars = (props: IStarProps) => {
+
+    const fullStars = []
+    for (let i = 0; i < props.score; i++){
+        fullStars.push(i)
+    }
+
+    return(
+     fullStars.map(() => {
+        return (<img src={fullStar} />)
+     })   
+    )
 }
 
 const GamePage = (props: IProps) => {
@@ -77,20 +95,33 @@ const GamePage = (props: IProps) => {
                         return (
                             <li key={index}>
                                 <article>
-                                    <h1><Link to={`/profile/${rating.user}`}><img src={profileIcon} alt="" /> Autor (id:{rating.user})</Link><span>Nota: {rating.score}/5</span></h1>
+                                    <h1><Link to={`/profile/${rating.user}`}><img src={profileIcon} alt="" /> Autor (id:{rating.user})</Link>
+                                    <span>
+                                        Avaliação: <Stars score={rating.score}/>
+                                    </span>
+                                    </h1>
                                     <p>{rating.description}</p>
                                 </article>
                             </li>
                         )
                     })}
-                    {ratings.length === 0 && 
                     <div className={styles.emptyContainer}>
+                    {ratings.length === 0 ? 
+                    <>
                         <h2>
                             Esse jogo não possui avaliações.
                         </h2>
                         <button onClick={() => setIsOpen(true)}>Seja o primeiro a avaliar!</button>
-                    </div>
+                    </>
+                    :
+                    <>
+                    <h2>
+                        Você ainda não avaliou esse jogo.
+                    </h2>
+                        <button onClick={() => setIsOpen(true)}>Avaliar esse jogo</button>
+                    </>
                     }
+                    </div>
                 </ul>
             </section>
             <Dialog title={'Criar Review'} isOpen={isOpen} setIsOpen={setIsOpen}>

@@ -113,7 +113,11 @@ background-color: rgb(30, 29, 36);
             border: 1px solid rgba(128, 128, 128, 0.219);    
             display: flex;
             justify-content: space-between;
-
+            & > span {
+                display: flex;
+                gap: .5rem;
+                font-weight: 500;
+            }
             & > a{
                 display: flex;
                 align-items: center;
