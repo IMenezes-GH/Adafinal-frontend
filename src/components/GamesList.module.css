@@ -8,7 +8,10 @@
     flex-direction: column;
     
     & ul {
-        list-style-type: none;
+     
+        border: 4px double #16A5BE;
+        height: 100vh;
+        
     }
 
     & > section{
@@ -30,11 +33,6 @@
         text-align: center;
         padding: 1rem 0;
     }
-}
-
-ul {
-    border: 4px double #16A5BE;
-    height: 100vh;
 }
 
 .gameArticle{
