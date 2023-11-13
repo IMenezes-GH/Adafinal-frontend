@@ -26,6 +26,7 @@ type User = {
 }
 
 type Rating = {
+    _id: string,
     id: string,
     game: string,
     user: string,

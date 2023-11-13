@@ -7,14 +7,16 @@ import { requestAPI } from '../../api/fetchData';
 interface IReview {
   title: string,
   score: number,
-  link: string
+  link: string,
+  reviewID: string
 }
 
 
 const ReviewItem = (props:IReview) => {
+  console.log(props);
   return (
     <li className={styles.reviewLink}>
-        <Link to={`/games/${props.link}`}><span>{props.title}</span> - <span>{props.score}/5</span></Link>
+        <Link to={`/games/${props.link}#${props.reviewID}`}><span>{props.title}</span> - <span>{props.score}/5</span></Link>
     </li>
   )
 }
@@ -135,7 +137,8 @@ const ProfileLayout = (props: userProps) => {
                userReviews.length >= 1 && userReviews.map((review: Rating, index) => {
                   return (
                     <ReviewItem 
-                      key={index} 
+                      key={index}
+                      reviewID={review._id} 
                       link={review.game}
                       title={review.description.length > 12 ? review.description.substring(0,12) + '(...)' : review.description} 
                       score={review.score}/>

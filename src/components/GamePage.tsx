@@ -97,7 +97,7 @@ const GamePage = (props: IProps) => {
                 <ul className={styles.reviewList}>
                     {ratings.length > 0 && ratings.map((rating: Rating, index) =>{
                         return (
-                            <li key={index}>
+                            <li id={rating.id} key={index}>
                                 <article>
                                     <h1><Link to={`/profile/${rating.user}`}><img src={profileIcon} alt="" /> Autor (id:{rating.user})</Link>
                                     <span>
