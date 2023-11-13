@@ -18,7 +18,6 @@
     flex-direction: column;
     & ul {
         list-style-type: none;
-        border: 4px double #379daf5e;
         width: 80%;
         height: 100vh;
         margin: auto;
@@ -67,12 +66,15 @@
 
 .recommended {
     
-    border: 4px double #e7472b56;
+    border: 4px double #f83f1e56 !important;
+    background-color: #9E003A;
     max-height: 90vh;
     padding: 1rem;
 
     & .gameArticle{
-        border: 4px double #e7472b56;
+        border: 4px ridge rgb(26, 24, 24);
+        border-radius: .4rem;
+        box-shadow: 1px 5px 14px rgba(36, 19, 24, 0.788);
     }
     
     & .banner{

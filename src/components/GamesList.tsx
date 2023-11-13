@@ -49,7 +49,7 @@ const GamesList = (props: Props) => {
                 return (
                 <li key={index}>
                   <article className={styles.gameArticle}>
-                    <h1><Link to={'/games/'+game._id}>{game.name}</Link><span>{game.score}/5</span></h1>
+                    <h1><Link to={'/games/'+game._id}>{game.name}</Link></h1>
                     <p><Link to={'/games/'+game._id}>{game.description.length > 45 ? game.description.substring(0, 45) + '... (Ler mais)' : game.description}</Link></p>
                   </article>
                 </li>)}) : <p>Loading...</p>}
@@ -62,7 +62,7 @@ const GamesList = (props: Props) => {
                 return (
                 <li key={index}>
                   <article className={styles.gameArticle}>
-                    <h1><Link to={'/games/'+game._id}>{game.name}</Link><span>{game.score}/5</span></h1>
+                    <h1><Link to={'/games/'+game._id}>{game.name}</Link></h1>
                     <p><Link to={'/games/'+game._id}>{game.description.length > 100 ? game.description.substring(0, 100) + '... (Ler mais)' : game.description}</Link></p>
                     <div className={styles.banner}>
                     </div>
