@@ -1,0 +1,92 @@
+.gamePage{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.gameBanner{
+    box-sizing: content-box;
+    width: 100vw;
+    height: 40vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+
+    & h1 {
+        display: flex;
+        justify-content: space-between;
+        font-size: 4rem;
+        padding: 1rem 2.5rem;
+        padding-bottom: 1rem;
+        /* background-color: rgba(17, 13, 13, 0.801); */
+        background: linear-gradient(rgba(17, 13, 13, 0.801), rgba(34, 33, 33, 0.479));
+    }
+  }
+
+  .gameDescription{
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    width: 70%;
+    text-align: justify;
+  }
+
+.reviewContainer{
+flex-grow: 1;
+background-color: rgb(30, 29, 36);
+}
+
+.emptyContainer{
+
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+
+    background: linear-gradient(rgb(22, 22, 22), rgb(0, 0, 0));
+
+    display: grid;
+    place-content: center;
+    padding: 5rem 0;
+
+    /* flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+    gap: 1rem;
+
+    & button {
+        cursor: pointer;
+        background-color: #0E0E11;
+        border-radius: .2rem;
+        color: white;
+        font-size: 1.25rem;
+        font-family:Verdana, Geneva, Tahoma, sans-serif ;
+
+        border: 2px solid rgb(22, 165, 190);
+        background-color: transparent;
+        font-weight: 600;
+        padding: 1rem;
+        animation: colorSwapBlue 2s linear 0s infinite alternate forwards;
+    
+        transition: all .2s linear;
+
+        &:hover{
+            background-color: rgb(0, 225, 255);
+            color: black;
+            transform: scale(1.05);
+            animation: colorSwapBlue 2s ease-out 0s 1 forwards;
+        }
+    }
+}
+
+@keyframes colorSwapBlue {
+    from {
+        border-color: rgb(0, 225, 255);
+        box-shadow: 0px 4px 15px rgba(0, 225, 255, 0.247);
+    }
+    to {
+        border-color: rgb(0, 225, 255);
+        box-shadow: 0px 4px 15px rgb(0, 225, 255);
+    }
+  }
+  

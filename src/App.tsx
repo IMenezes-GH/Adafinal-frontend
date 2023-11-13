@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { refreshAPI } from './api/fetchData'
 import Logout from './components/Logout'
+import GamesPage from './components/GamePage'
 
 const FETCH_URL = 'http://localhost:3000'
 
@@ -57,6 +58,7 @@ function App() {
       <Route path={"/"} element={<Layout />}>
         <Route index element={<NewsLayout/>} />
         <Route path={"games"} element={<GamesLayout />} />
+        <Route path={"/games/:gameid"} element={<GamesPage/>}/>
         <Route path={"forum"} element={<ForumLayout />} />
         <Route path={"ranking"} element={<RankingLayout />} />
         <Route path={"profile"} 

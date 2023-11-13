@@ -66,6 +66,30 @@ main{
   }
 }
 
+@keyframes colorSwapBlue {
+  from {
+      border-color: rgb(0, 225, 255);
+      box-shadow: 0px 4px 15px rgba(0, 225, 255, 0.247);
+  }
+  to {
+      border-color: rgb(0, 225, 255);
+      color: white;
+      box-shadow: 0px 4px 15px rgb(0, 225, 255);
+  }
+}
+
+@keyframes colorSwapRed {
+  from {
+      border-color: rgb(255, 0, 0);
+      box-shadow: 0px 4px 15px rgba(255, 0, 0, 0.247);
+  }
+  to {
+      border-color: rgb(255, 0, 0);
+      color: white;
+      box-shadow: 0px 4px 15px rgb(255, 0, 0);
+  }
+}
+
 /* APLICAR APÓS SCROLL */
 & .addShadow{
   animation: tweakColor 5s ease-in-out 0s infinite alternate;
@@ -74,3 +98,4 @@ main{
 .open{
   display: inline !important;
 }
+

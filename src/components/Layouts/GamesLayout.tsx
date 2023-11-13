@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-
+import styles from './GamesLayout.module.css'
+import { Link } from "react-router-dom";
 // const FETCH_URL = 'https://adafinal-backend.vercel.app/games';
 const FETCH_URL = 'http://localhost:3000/games';
 
@@ -35,7 +36,7 @@ const GamesPage = () => {
 
 
   return (
-    <main>
+    <main className={styles.gameMain}>
         <section>
           <h1>Jogos</h1>
           <p>Últimos jogos adicionados</p>
@@ -45,9 +46,9 @@ const GamesPage = () => {
             {isLoaded ? gameList.map((game: Game, index) => {
               return (
               <li key={index}>
-                <article>
-                  <h1>{game.name}</h1>
-                  <p>{game.description} <span>{game.score}</span></p>
+                <article className={styles.gameArticle}>
+                  <h1><Link to={'/games/'+game._id}>{game.name}</Link><span>{game.score}/5</span></h1>
+                  <p><Link to={'/games/'+game._id}>{game.description.length > 250 ? game.description.substring(0, 250) + '... (Ler mais)' : game.description}</Link></p>
                 </article>
               </li>)}) : <p>Loading...</p>}
           </ul>
