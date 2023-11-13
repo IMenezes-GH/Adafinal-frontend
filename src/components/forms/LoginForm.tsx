@@ -25,6 +25,7 @@ const LoginForm = (props: userProps) => {
     setMessage(login.data.message);
     if (login.ok) {
 
+      login.data.user._id = login.data.user.id;
       props.setUser(login.data.user);
       props.setToken(login.data.token);
       navigate('/profile')

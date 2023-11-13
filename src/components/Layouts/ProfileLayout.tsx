@@ -47,6 +47,7 @@ const ProfileLayout = (props: userProps) => {
 
   useEffect(() => {
 
+    console.log(params, props.user)
     if (!params.userid && !props.user._id) navigate('/login');
     
     if (!params.userid || params.userid === props.user._id){
