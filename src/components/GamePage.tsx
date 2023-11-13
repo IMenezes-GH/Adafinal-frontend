@@ -73,7 +73,6 @@ const GamePage = (props: IProps) => {
             <section className={styles.reviewContainer}>
                 <ul>
                     {ratings.length > 0 && ratings.map((rating: Rating, index) =>{
-                        console.log(ratings);
                         return (
                             <li key={index}>
                                 <article>

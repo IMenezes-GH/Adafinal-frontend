@@ -47,7 +47,6 @@ const ProfileLayout = (props: userProps) => {
   }
 
   useEffect(() => {
-    console.log(params, profile, props.user)
     
     if (!params.userid || params.userid === props.user._id){
       setIsUserProfile(true);

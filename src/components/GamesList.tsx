@@ -35,8 +35,8 @@ const GamesList = () => {
 
   return (
     <main className={styles.gameMain}>
-        <section>
-          <h1>Jogos</h1>
+        <section className={styles.pageHeader}>
+          <h1 className="title">Jogos</h1>
         </section>
         <section className={styles.gameListsSection}>
           <div>

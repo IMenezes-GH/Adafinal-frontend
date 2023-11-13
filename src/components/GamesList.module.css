@@ -1,29 +1,35 @@
+.pageHeader{
+    font-size: 2rem;
+    text-align: center;
+    min-height: 10vh;
+    padding: 1rem;
+    display: grid;
+    place-content: center;
+}
+
 .gameMain{
     /* background-color: var(--dark); */
-    background-image: url('./boris-langvand-XJs1pH6wftw-unsplash.jpg');
-    background-size: contain;
+    background-image: url('./ben-neale-zpxKdH_xNSI-unsplash.jpg');
+    background-size: cover;
+    background-position: 10rem 25rem;
 
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    
     & ul {
-     
-        border: 4px double #16A5BE;
+        list-style-type: none;
+        border: 4px double #379daf5e;
+        width: 80%;
         height: 100vh;
+        margin: auto;
         
     }
 
-    & > section{
-        border: 1px solid rgba(255, 255, 255, 0.144);
-        /* padding: 1rem; */
-
-    }
 }
 
 .gameListsSection{
-    border: 1px double white;
-    background: radial-gradient(rgba(0, 0, 0, 0.863), rgb(26, 24, 24));
+    border-top: 1px solid gray;
+    background-color: #0E0E11;
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -39,7 +45,7 @@
 
     max-width: 100%;
     background-color: #18181a;
-    border: 4px double #16A5BE;
+    border: 4px double #379daf5e;
     
     & p {
         /* text-decoration: underline; */
@@ -61,17 +67,18 @@
 
 .recommended {
     
-    border: 4px double #E7472B;
+    border: 4px double #e7472b56;
     max-height: 90vh;
+    padding: 1rem;
 
     & .gameArticle{
-        border: 4px double #E7472B;
+        border: 4px double #e7472b56;
     }
     
     & .banner{
         box-sizing: border-box;
         width: 100%;
         height: 20vh;
-        background: radial-gradient(rgb(36, 36, 36), rgb(7, 6, 8));
+        background: radial-gradient(rgb(8, 3, 3), rgba(4, 4, 10, 0.452));
     }
 }
