@@ -10,9 +10,6 @@ interface userProps {
   token: string
 }
 
-
-
-
 const Header = (props: userProps) => {
   
   const [isOpen, setIsOpen] = useState(false);

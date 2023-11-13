@@ -1,31 +1,10 @@
 const BASE_URL = 'http://localhost:3000'
 
-export const requestData = async(slug: string) => {
+export const requestAPI = async(slug: string, options?: RequestInit) => {
 
-    const response = await fetch(BASE_URL + slug);
-    if (!response.ok) throw new Error(`Algo deu errado. Por favor recarregue a página e tente novamente.`)
-    return response
-
-}
-
-
-const requestAPI = async(slug: string, options: RequestInit, errorMessage = '100') => {
-    try {
-        const response = await fetch(BASE_URL + slug, options);
-        const message = await response.json()
-        console.log(response, message)
-        if (!response.ok) throw new Error(`Algo deu errado. Por favor recarregue a página e tente novamente.`)
-
-    }
-    catch (err){
-        if (err instanceof Error){
-            errorMessage = err.message
-        }
-    }
-    finally {
-        // eslint-disable-next-line no-unsafe-finally
-        return errorMessage
-    }
+    const response = await fetch(BASE_URL + slug, options && options);
+    const message = await response.json()
+    return {response, message}
 }
 
 export const refreshAPI = async() => {
@@ -65,5 +44,3 @@ export const loginAPI = async(loginData: login) => {
     return {ok: response.ok, data}
 
 }
-
-export default requestAPI

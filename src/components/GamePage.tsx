@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styles from './GamePage.module.css'
-import requestAPI, { requestData } from '../api/fetchData'
+import { requestAPI } from '../api/fetchData'
 import Dialog from './Dialog/Dialog'
 import { Link } from 'react-router-dom'
 
@@ -18,16 +18,13 @@ const GamePage = (props: IProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const fetchGame = async() => {
-        const response = await requestData('/games/' + param.gameid);
-        const data = await response.json();
-        setGame(data)
+        const {message} = await requestAPI('/games/' + param.gameid);
+        setGame(message)
     }
 
     const fetchRatings = async() => {
-        const response = await requestData('/ratings?game=' + param.gameid);
-        const ratings = await response.json();
-
-        setRatings(ratings);
+        const {message} = await requestAPI('/ratings?game=' + param.gameid);
+        setRatings(message);
     }
 
     const handleSubmit = async(ev: FormEvent) => {
@@ -56,7 +53,6 @@ const GamePage = (props: IProps) => {
     useEffect(() => {
         fetchGame();
         fetchRatings();
-        // console.log(game, ratings)
     }, [])
 
   return (

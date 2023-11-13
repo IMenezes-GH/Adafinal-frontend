@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import styles from './ProfileLayout.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Dialog from '../Dialog/Dialog';
-import { requestData } from '../../api/fetchData';
+import { requestAPI } from '../../api/fetchData';
 
 interface IReview {
   title: string,
@@ -29,10 +29,9 @@ const ProfileLayout = (props: userProps) => {
 
   const getUserRatings = async () => {
     if (props.user.id){
-      console.log(props.user.id)
-      const response = await requestData('/ratings?user=' + props.user.id);
-      const data = await response.json();
-      setUserReviews(data);
+      const {message} = await requestAPI('/ratings?user=' + props.user.id);
+    
+      setUserReviews(message);
     }
   }
 
@@ -62,7 +61,7 @@ const ProfileLayout = (props: userProps) => {
       profileImageURL: target.profileImageURL.value || props.user.profileImageURL,
     }
 
-    const response = await fetch(URL + '/users', {
+    const {response, message} = await requestAPI('/users', {
       method: 'PATCH',
       mode: 'cors',
       credentials: 'include',
@@ -72,9 +71,9 @@ const ProfileLayout = (props: userProps) => {
       },
       body: JSON.stringify(data)
     })
-    if (response.status === 409) setErrorMsg('Email e nome de usuário precisam ser valores únicos')
-    if (response.ok){
-      const updatedUser = await response.json();
+    if (response.status === 409) {setErrorMsg('Email e nome de usuário precisam ser valores únicos')}
+    else {
+      const updatedUser = message;
       props.setUser(updatedUser.user);
       props.setToken(updatedUser.token);
       setIsOpen(false);

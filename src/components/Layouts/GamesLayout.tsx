@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from './GamesLayout.module.css'
 import { Link } from "react-router-dom";
-// const FETCH_URL = 'https://adafinal-backend.vercel.app/games';
-const FETCH_URL = 'http://localhost:3000/games';
+import { requestAPI } from "../../api/fetchData";
 
 const GamesPage = () => {
 
@@ -14,9 +13,8 @@ const GamesPage = () => {
   useEffect(() => {
 
     const fetchGames = async () => {
-      const fetchGames = await fetch(FETCH_URL);
-      const data = await fetchGames.json()
-      return data;
+      const {message} = await requestAPI('/games/all');
+      return message;
     }
 
     if (!sessionStorage.getItem('games')){
