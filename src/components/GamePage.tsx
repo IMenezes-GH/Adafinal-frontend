@@ -1,5 +1,5 @@
-import { FormEvent, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { FormEvent, useCallback, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import styles from './GamePage.module.css'
 import { requestAPI } from '../api/fetchData'
 import Dialog from './Dialog/Dialog'
@@ -36,9 +36,9 @@ const GamePage = (props: IProps) => {
     const [game, setGame] = useState<Game>();
     const [ratings, setRatings] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
-    
-    
 
+    const navigate = useNavigate();
+    
     const handleSubmit = async(ev: FormEvent) => {
         ev.preventDefault();
         const target = ev.target as HTMLFormElement
@@ -60,27 +60,31 @@ const GamePage = (props: IProps) => {
             },
             body: JSON.stringify(data)
         })
-        console.log(response, message)
         if (response.ok) setIsOpen(false);
+        else target.output.innerText = message;
     }
-
-    useEffect(() => {
-
-        const fetchGame = async() => {
-            const {message} = await requestAPI('/games/' + param.gameid);
-            const categoryObject = props.category.filter((cat: Category) => cat._id === message.category)[0]
+    
+    const fetchGame = useCallback(async() => {
+        const {message} = await requestAPI('/games/' + param.gameid);
+        const categoryObject = props.category.filter((cat: Category) => cat._id === message.category)[0]
+        if (categoryObject){
             message.category = categoryObject.name;
             setGame(message)
         }
+    }, [param.gameid, props.category])
     
-        const fetchRatings = async() => {
-            const {message} = await requestAPI('/ratings?game=' + param.gameid);
-            setRatings(message);
-        }
 
+    const fetchRatings = useCallback(async() => {
+        const {message} = await requestAPI('/ratings?game=' + param.gameid);
+        setRatings(message);
+    }, [param.gameid])
+
+
+
+    useEffect(() => {
         fetchGame();
         fetchRatings();
-    }, [ratings, param.gameid, props.category])
+    })
 
   return (
     <main className={styles.gamePage}>
@@ -132,7 +136,7 @@ const GamePage = (props: IProps) => {
                             <h2>
                                 Esse jogo não possui avaliações.
                                 </h2>
-                                <button>Faça seu login e seja o primeiro à avaliar!</button>
+                                <button onClick={() => navigate('/login')}>Faça seu login e seja o primeiro à avaliar!</button>
                             </>
                             }
                         </>
@@ -153,7 +157,7 @@ const GamePage = (props: IProps) => {
                             <h2>
                             Você ainda não avaliou esse jogo.
                             </h2>
-                            <button>Faça seu login e seja o primeiro à avaliar!</button>
+                            <button onClick={() => navigate('/login')}>Faça seu login e seja o primeiro à avaliar!</button>
                         </>
                             }
                         </>
@@ -177,6 +181,7 @@ const GamePage = (props: IProps) => {
                         <button type='button' onClick={() => setIsOpen(false)}>Cancelar</button>
                         <button type='submit'>Enviar</button>
                     </div>
+                    <output id='output'></output>
                     </form>
             </Dialog>
         </>
