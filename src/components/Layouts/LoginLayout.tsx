@@ -1,7 +1,18 @@
+import { useEffect } from 'react';
 import styles from './LoginLayout.module.css';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 
-const LoginLayout = () => {
+interface IProps{
+  token?: string
+}
+
+const LoginLayout = (props: IProps) => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (props.token) navigate('/profile');
+  }, [])
 
   return (
     <>

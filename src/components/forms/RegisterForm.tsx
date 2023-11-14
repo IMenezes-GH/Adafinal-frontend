@@ -30,7 +30,7 @@ const RegisterForm = () => {
         birthDate
       }
   
-      const {response} = await requestAPI('/users', {
+      const {response, message} = await requestAPI('/users', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -39,14 +39,10 @@ const RegisterForm = () => {
         body: JSON.stringify(user)
       })
       if (!response.ok) {
-        setName('');
-        setPassword('');
-        setEmail('');
-        setUsername('');
-        setBirthDate('');
-        (ev.target as HTMLFormElement).reset()
-        navigate('/login')
+        (ev.target as HTMLFormElement).output.innerText = message.message
       }
+      else navigate('/login')
+      console.log(response);
     }
 
   return (
@@ -138,6 +134,7 @@ const RegisterForm = () => {
             <button type='reset'>Limpar</button>
             <button type='submit'>Enviar</button>
           </div>
+          <output id='output'></output>
         </form>
   )
 }

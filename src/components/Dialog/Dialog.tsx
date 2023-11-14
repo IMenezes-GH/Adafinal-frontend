@@ -22,7 +22,7 @@ const Dialog = ({title, isOpen, setIsOpen, children}: props) => {
   }, [isOpen])
 
   return (
-    <dialog ref={modal} onClose={() => setIsOpen(false)}>
+    <dialog ref={modal} onClose={() => setIsOpen(false)} onCancel={() => setIsOpen(false)}>
       <h1>{title}</h1>
       {children}
     </dialog>

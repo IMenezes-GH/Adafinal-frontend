@@ -97,7 +97,7 @@ const GamePage = (props: IProps) => {
                 <ul className={styles.reviewList}>
                     {ratings.length > 0 && ratings.map((rating: Rating, index) =>{
                         return (
-                            <li id={rating.id} key={index}>
+                            <li key={index} id={`${rating._id}`}>
                                 <article>
                                     <h1><Link to={`/profile/${rating.user}`}><img src={profileIcon} alt="" /> Autor (id:{rating.user})</Link>
                                     <span>
@@ -112,21 +112,45 @@ const GamePage = (props: IProps) => {
                     { ratings.findIndex((rating: Rating) => rating.user === props.user._id) === -1 &&
 
                         <div className={styles.emptyContainer}>
-                        {ratings.length === 0 ?
+                        {ratings.length === 0  ?
                         <>
+                            {props.user._id ?
+                            <>
+                                <h2>
+                                Esse jogo não possui avaliações.
+                                </h2>
+                                <button onClick={() => setIsOpen(true)}>Seja o primeiro a avaliar!</button>
+                            </>
+                            : 
+                            <>
+                            
                             <h2>
                                 Esse jogo não possui avaliações.
-                            </h2>
-                            <button onClick={() => setIsOpen(true)}>Seja o primeiro a avaliar!</button>
+                                </h2>
+                                <button>Faça seu login e seja o primeiro à avaliar!</button>
+                            </>
+                            }
                         </>
                         
                         :
 
                         <>
-                        <h2>
+                        {props.user._id 
+                        ?
+                            <>
+                            <h2>
                             Você ainda não avaliou esse jogo.
-                        </h2>
+                            </h2>
                             <button onClick={() => setIsOpen(true)}>Avaliar esse jogo</button>
+                            </>
+                        :
+                        <>
+                            <h2>
+                            Você ainda não avaliou esse jogo.
+                            </h2>
+                            <button>Faça seu login e seja o primeiro à avaliar!</button>
+                        </>
+                            }
                         </>
                         }
                     </div>

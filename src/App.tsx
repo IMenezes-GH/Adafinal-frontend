@@ -86,7 +86,7 @@ function App() {
           element={<Logout 
           setToken={setToken} 
           setUser={setUser}/>} />
-        <Route path={"login"} element={<LoginLayout />} >
+        <Route path={"login"} element={<LoginLayout token={token}/>} >
           <Route index 
           element={<LoginForm 
           user={user} 

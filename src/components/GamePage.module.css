@@ -110,6 +110,8 @@ background-color: rgb(30, 29, 36);
         padding: 1rem;
         background-color: black;
         border: 1px solid rgba(128, 128, 128, 0.219);
+        scroll-behavior: smooth;
+        scroll-margin-top: 30vh;
         
         & article {
 

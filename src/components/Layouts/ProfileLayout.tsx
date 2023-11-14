@@ -27,7 +27,7 @@ const ProfileLayout = (props: userProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState('');
   
-  const [profile, setProfile] = useState(props.user);
+  const [profile, setProfile] = useState<User>(props.user);
   const [isUserProfile, setIsUserProfile] = useState(false);
 
   const params = useParams();
@@ -49,8 +49,7 @@ const ProfileLayout = (props: userProps) => {
 
   useEffect(() => {
 
-    console.log(params, props.user)
-    if (!params.userid && !props.user._id) navigate('/login');
+    if (!params.userid && !props.user.name) navigate('/login');
     
     if (!params.userid || params.userid === props.user._id){
       setIsUserProfile(true);
@@ -71,16 +70,16 @@ const ProfileLayout = (props: userProps) => {
   const handleEditProfile = async () => {
     setIsOpen(true)
   }
-
+  
   const submitModal = async(ev: FormEvent) => {
     ev.preventDefault();
     const target = ev.target as HTMLFormElement;
 
-
     if (!profile || !props.token) return;
 
     const data = {
-      id: profile._id,
+      active: true,
+      id: profile._id || profile.id,
       email: target.email.value || profile.email,
       name: target.fullName.value || profile.name,
       username: target.username.value || profile.username,

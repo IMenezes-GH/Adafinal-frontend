@@ -42,6 +42,7 @@ export const loginAPI = async(loginData: login) => {
     })
 
     const data = await response.json();
+    console.log(data, response)
     return {ok: response.ok, data}
 
 }

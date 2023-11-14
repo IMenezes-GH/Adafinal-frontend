@@ -3,14 +3,34 @@
     display: grid;
     place-content: center;
     gap: 1rem;
-    background-color: black;
-    border-top: 6px solid rgba(92, 92, 92, 0.945);
+    
+    border-top: .5rem ridge #2c2c2c;
     
     width: 100%;
     min-height: 20vh;
     max-height: 100%;
 
-    background-image: url('./layered-steps-haikei.svg');
-    background-size: contain;
+    background-image: url('./low-poly-grid-haikei.svg');
+    background-size: cover;
     background-position: 50%;
+}
+
+.adminOptions{
+
+    & ul {
+        display: flex;
+        gap: 1rem;
+        list-style-type: none;
+   }
+
+   & button {
+    cursor: pointer;
+    background-color: #9E003A;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: .2rem;
+    padding: .55rem;
+    box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.5);
+   }
 }
