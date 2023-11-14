@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react"
 import { requestAPI } from "../api/fetchData";
+import styles from './CategorySelector.module.css';
 
-const CategorySelector = () => {
+interface IProps{
+    forceOption?: boolean
+}
+
+const CategorySelector = (props: IProps) => {
 
     const [categories, setCategories] = useState([]);
 
@@ -11,13 +16,17 @@ const CategorySelector = () => {
         }))();
 
         request.then((r) => {
-            console.log(r);
+            setCategories(r.message)
         })
     }, [])
 
   return (
-    <select>
-
+    <select id="category" className={styles.CategorySelector}>
+        {!props.forceOption && <option defaultChecked value={'all'}>Categoria</option>}
+        {categories.length > 0 &&
+        categories.map((category: Category) => {
+            return (<option key={category._id} value={category._id}>{category.name}</option>)
+        })}
     </select>
   )
 }

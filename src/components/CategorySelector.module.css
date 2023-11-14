@@ -1,0 +1,17 @@
+.CategorySelector{
+    
+    margin-top: 1rem;
+    cursor: pointer;
+    background-color: #0E0E11;
+    color: white;
+    text-align: center;
+    padding: 0.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.507);
+    font-size: 1.2rem;
+    font-weight: 600;
+
+    box-shadow: -1px -1px 0 rgb(199, 196, 211),
+    3px -3px 0 rgb(22, 165, 190),
+    -1px 3px 0 rgb(231, 71, 43),
+    1px 1px 0 rgb(131, 61, 40);;
+}

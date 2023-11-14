@@ -1,39 +1,24 @@
 import { useEffect, useState } from "react";
 import styles from './GamesList.module.css'
 import { Link } from "react-router-dom";
-import { requestAPI } from "../api/fetchData";
 import CategorySelector from "./CategorySelector";
 
 interface Props {
-  category: Category[]
+  category: Category[],
+  gameList: Game[],
+  setGameList: CallableFunction
 }
 
 const GamesList = (props: Props) => {
 
-  const [gameList, setGameList] = useState([]);
+  
   const [isLoaded, setIsLoaded] = useState(false);
 
   
   useEffect(() => {
 
-    const fetchGames = async () => {
-      const {message} = await requestAPI('/games/all');
-      return message;
-    }
-
-    if (!sessionStorage.getItem('games')){
-      (async() => await fetchGames())().then((d) => {
-        sessionStorage.setItem('games', JSON.stringify(d));
-        setGameList(d)
-        setIsLoaded(true)
-      })
-    }
-    else {
-      setGameList(JSON.parse(sessionStorage.getItem('games') || '[]'))
-      setIsLoaded(true)
-    }
-
-  }, [])
+    setIsLoaded(true);
+  }, [props.gameList])
 
 
 
@@ -47,7 +32,7 @@ const GamesList = (props: Props) => {
           <div>
             <h2>Últimos jogos adicionados:</h2>
             <ul>
-              {isLoaded ? gameList.map((game: Game, index) => {
+              {isLoaded ? props.gameList.map((game: Game, index) => {
                 return (
                 <li key={index}>
                   <article className={styles.gameArticle}>
@@ -60,7 +45,7 @@ const GamesList = (props: Props) => {
           <div>
             <h2>Recomendados para você</h2>
             <ul className={styles.recommended}>
-            {isLoaded ? gameList.map((game: Game, index) => {
+            {isLoaded ? props.gameList.slice(0, 2).map((game: Game, index) => {
                 return (
                 <li key={index}>
                   <article className={styles.gameArticle}>

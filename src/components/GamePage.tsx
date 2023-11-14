@@ -1,4 +1,4 @@
-import { FormEvent, useCallback, useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import styles from './GamePage.module.css'
 import { requestAPI } from '../api/fetchData'
@@ -37,7 +37,7 @@ const GamePage = (props: IProps) => {
     const [ratings, setRatings] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
 
-    const navigate = useNavigate();
+    const navigate = useNavigate();<output id='output'></output>
     
     const handleSubmit = async(ev: FormEvent) => {
         ev.preventDefault();
@@ -64,27 +64,27 @@ const GamePage = (props: IProps) => {
         else target.output.innerText = message;
     }
     
-    const fetchGame = useCallback(async() => {
+    const fetchGame = async() => {
         const {message} = await requestAPI('/games/' + param.gameid);
         const categoryObject = props.category.filter((cat: Category) => cat._id === message.category)[0]
         if (categoryObject){
             message.category = categoryObject.name;
             setGame(message)
         }
-    }, [param.gameid, props.category])
+    }
     
 
-    const fetchRatings = useCallback(async() => {
+    const fetchRatings = async() => {
         const {message} = await requestAPI('/ratings?game=' + param.gameid);
         setRatings(message);
-    }, [param.gameid])
+    }
 
 
 
     useEffect(() => {
         fetchGame();
         fetchRatings();
-    })
+    }, [])
 
   return (
     <main className={styles.gamePage}>
@@ -168,9 +168,6 @@ const GamePage = (props: IProps) => {
             </section>
             <Dialog title={'Criar Review'} isOpen={isOpen} setIsOpen={setIsOpen}>
                     <form onSubmit={(ev) => handleSubmit(ev)}>
-                    <div>
-                        <input type="text" placeholder='Título' />
-                    </div>
                     <div>
                         <textarea id="description" rows={3} placeholder='Descrição'></textarea>
                     </div>

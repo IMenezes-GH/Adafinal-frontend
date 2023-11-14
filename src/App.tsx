@@ -22,8 +22,15 @@ function App() {
   
   const [user, setUser] = useState<User>({username: '', name: '', description: '', state: '', country: ''});
   const [token, setToken] = useState('');
+  const [gameList, setGameList] = useState([]);
   const [category, setCategory] = useState<Category[]>([]);
   
+  const loadGames = async () => {
+    const response = await fetch(BASE_URL + '/games/all');
+    const message = await response.json();
+    setGameList(message)
+  }
+
   const loadCategories = async() => {
     const response = await fetch(BASE_URL + '/category');
     const message = await response.json()
@@ -33,6 +40,7 @@ function App() {
   useEffect(() => {
  
     loadCategories();
+    loadGames();
     
     const jwt = token && (jwtDecode(token))
     const current_time = new Date().getTime() / 1000;
@@ -56,7 +64,7 @@ function App() {
         <Header user={user} setUser={setUser} token={token}/>
       </div>
       <Outlet />
-      <Footer user={user}/>
+      <Footer gameList={gameList} setGameList={setGameList} token={token} user={user}/>
       </>
     )
   }
@@ -66,7 +74,7 @@ function App() {
     <Routes>
       <Route path={"/"} element={<Layout />}>
         <Route index element={<NewsLayout/>} />
-        <Route path={"games"} element={<GamesList category={category} />} />
+        <Route path={"games"} element={<GamesList gameList={gameList} setGameList={setGameList} category={category} />} />
         <Route path={"/games/:gameid"} element={<GamesPage category={category} token={token} user={user}/>}/>
         <Route path={"forum"} element={<ForumLayout />} />
         <Route path={"ranking"} element={<RankingLayout />} />
