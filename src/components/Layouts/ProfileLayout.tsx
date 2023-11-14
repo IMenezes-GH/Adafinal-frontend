@@ -39,7 +39,7 @@ const ProfileLayout = (props: userProps) => {
     
     const getUserRatings = async () => {
       if (profile._id || profile.id){
-        const {message} = await requestAPI('/ratings?user=' + profile._id);
+        const {message} = await requestAPI('/ratings?user=' + (profile._id || profile.id));
       
         setUserReviews(message);
       }

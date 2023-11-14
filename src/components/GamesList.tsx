@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from './GamesList.module.css'
 import { Link } from "react-router-dom";
 import { requestAPI } from "../api/fetchData";
+import CategorySelector from "./CategorySelector";
 
 interface Props {
   category: Category[]
@@ -40,6 +41,7 @@ const GamesList = (props: Props) => {
     <main className={styles.gameMain}>
         <section className={styles.pageHeader}>
           <h1 className="title">Jogos</h1>
+          <CategorySelector />
         </section>
         <section className={styles.gameListsSection}>
           <div>
