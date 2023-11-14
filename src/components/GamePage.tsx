@@ -37,28 +37,20 @@ const GamePage = (props: IProps) => {
     const [ratings, setRatings] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     
-    const fetchGame = async() => {
-        const {message} = await requestAPI('/games/' + param.gameid);
-        const categoryObject = props.category.filter((cat: Category) => cat._id === message.category)[0]
-        message.category = categoryObject.name;
-        setGame(message)
-    }
-
-    const fetchRatings = async() => {
-        const {message} = await requestAPI('/ratings?game=' + param.gameid);
-        setRatings(message);
-    }
+    
 
     const handleSubmit = async(ev: FormEvent) => {
         ev.preventDefault();
         const target = ev.target as HTMLFormElement
+        
         const data = {
             game: param.gameid,
             description: target.description.value,
             score: Number(target.score.value),
-            user: props.user._id
+            user: props.user._id || props.user.id
         }
-        await requestAPI('/ratings', {
+
+        const {response, message} = await requestAPI('/ratings', {
             method: 'POST',
             mode: 'cors',
             credentials: 'include',
@@ -68,14 +60,27 @@ const GamePage = (props: IProps) => {
             },
             body: JSON.stringify(data)
         })
-
-        fetchRatings();
+        console.log(response, message)
+        if (response.ok) setIsOpen(false);
     }
 
     useEffect(() => {
+
+        const fetchGame = async() => {
+            const {message} = await requestAPI('/games/' + param.gameid);
+            const categoryObject = props.category.filter((cat: Category) => cat._id === message.category)[0]
+            message.category = categoryObject.name;
+            setGame(message)
+        }
+    
+        const fetchRatings = async() => {
+            const {message} = await requestAPI('/ratings?game=' + param.gameid);
+            setRatings(message);
+        }
+
         fetchGame();
         fetchRatings();
-    }, [])
+    }, [ratings, param.gameid, props.category])
 
   return (
     <main className={styles.gamePage}>
@@ -109,12 +114,12 @@ const GamePage = (props: IProps) => {
                             </li>
                         )
                     })}
-                    { ratings.findIndex((rating: Rating) => rating.user === props.user._id) === -1 &&
+                    { ratings.findIndex((rating: Rating) => rating.user === props.user._id || props.user.id) === -1 &&
 
                         <div className={styles.emptyContainer}>
                         {ratings.length === 0  ?
                         <>
-                            {props.user._id ?
+                            {props.user.username  ?
                             <>
                                 <h2>
                                 Esse jogo não possui avaliações.
@@ -135,7 +140,7 @@ const GamePage = (props: IProps) => {
                         :
 
                         <>
-                        {props.user._id 
+                        {props.user.username 
                         ?
                             <>
                             <h2>
@@ -169,7 +174,7 @@ const GamePage = (props: IProps) => {
                         <input type="number" id='score' placeholder='Nota (1-5)' min={1} max={5} />
                     </div>
                     <div className='row'>
-                        <button type='button'>Cancelar</button>
+                        <button type='button' onClick={() => setIsOpen(false)}>Cancelar</button>
                         <button type='submit'>Enviar</button>
                     </div>
                     </form>

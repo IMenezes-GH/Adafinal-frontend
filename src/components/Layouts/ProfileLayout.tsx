@@ -13,7 +13,6 @@ interface IReview {
 
 
 const ReviewItem = (props:IReview) => {
-  console.log(props);
   return (
     <li className={styles.reviewLink}>
         <Link to={`/games/${props.link}#${props.reviewID}`}><span>{props.title}</span> - <span>{props.score}/5</span></Link>
@@ -34,21 +33,23 @@ const ProfileLayout = (props: userProps) => {
 
   const navigate = useNavigate();
   
-  const getUserRatings = async () => {
-    if (profile._id){
-      const {message} = await requestAPI('/ratings?user=' + profile._id);
-    
-      setUserReviews(message);
-    }
-  }
   
-  const getUser = async () => {
-    const {message, response} = await requestAPI('/users?id=' + params.userid)
-    return {message, response};
-  }
-
+  
   useEffect(() => {
+    
+    const getUserRatings = async () => {
+      if (profile._id || profile.id){
+        const {message} = await requestAPI('/ratings?user=' + profile._id);
+      
+        setUserReviews(message);
+      }
+    }
 
+    const getUser = async () => {
+      const {message, response} = await requestAPI('/users?id=' + params.userid)
+      return {message, response};
+    }
+    
     if (!params.userid && !props.user.name) navigate('/login');
     
     if (!params.userid || params.userid === props.user._id){
@@ -65,7 +66,7 @@ const ProfileLayout = (props: userProps) => {
     
     // if (!profile || !props.token || !props.setToken || !props.setUser) navigate('/');
     getUserRatings()
-  }, [isUserProfile, profile])
+  }, [params.userid, props.user, navigate, profile._id, profile.id])
 
   const handleEditProfile = async () => {
     setIsOpen(true)

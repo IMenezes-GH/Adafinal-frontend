@@ -12,7 +12,7 @@ const LoginLayout = (props: IProps) => {
 
   useEffect(() => {
     if (props.token) navigate('/profile');
-  }, [])
+  }, [props.token, navigate])
 
   return (
     <>
