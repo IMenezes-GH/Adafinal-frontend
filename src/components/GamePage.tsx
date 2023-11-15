@@ -60,7 +60,10 @@ const GamePage = (props: IProps) => {
             },
             body: JSON.stringify(data)
         })
-        if (response.ok) setIsOpen(false);
+        if (response.ok) {
+            setIsOpen(false)
+            location.reload();
+        }
         else target.output.innerText = message;
     }
     
