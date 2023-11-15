@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import styles from './LoginLayout.module.css';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
+import styles from './LoginLayout.module.css';
 
-interface IProps{
+interface ILoginLayout{
   token?: string
 }
 
-const LoginLayout = (props: IProps) => {
+const LoginLayout = (props: ILoginLayout) => {
 
   const navigate = useNavigate();
 

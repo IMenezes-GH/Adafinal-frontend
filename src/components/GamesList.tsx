@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import CategorySelector from "./CategorySelector";
 
 interface Props {
-  category: Category[],
   gameList: Game[],
   setGameList: CallableFunction
 }
