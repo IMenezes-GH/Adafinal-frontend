@@ -129,6 +129,8 @@ const Footer = (props: IFooter) => {
                     <button onClick={() => setGameOpen(true)} role='button'>Cadastrar Jogo</button>
                 </li>
             </ul>
+            <CategoriaDialog token={props.token} title='' isOpen={categoryOpen} setIsOpen={setCategoryOpen}/>
+            <GameDialog gameList={props.gameList} setGameList={props.setGameList} token={props.token} title='' isOpen={gameOpen} setIsOpen={setGameOpen} />
         </div> 
         : 
         <div>
@@ -139,8 +141,6 @@ const Footer = (props: IFooter) => {
         <footer className={styles.Footer}>
             {/* <hr className='hr-blue'/> */}
             {content}
-            <CategoriaDialog token={props.token} title='' isOpen={categoryOpen} setIsOpen={setCategoryOpen}/>
-            <GameDialog gameList={props.gameList} setGameList={props.setGameList} token={props.token} title='' isOpen={gameOpen} setIsOpen={setGameOpen} />
         </footer>
     ) 
 }

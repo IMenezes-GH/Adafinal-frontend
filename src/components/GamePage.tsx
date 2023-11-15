@@ -37,7 +37,7 @@ const GamePage = (props: IProps) => {
     const [ratings, setRatings] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
 
-    const navigate = useNavigate();<output id='output'></output>
+    const navigate = useNavigate();
     
     const handleSubmit = async(ev: FormEvent) => {
         ev.preventDefault();
@@ -47,7 +47,7 @@ const GamePage = (props: IProps) => {
             game: param.gameid,
             description: target.description.value,
             score: Number(target.score.value),
-            user: props.user._id || props.user.id
+            user: props.user._id
         }
 
         const {response, message} = await requestAPI('/ratings', {
@@ -118,7 +118,7 @@ const GamePage = (props: IProps) => {
                             </li>
                         )
                     })}
-                    { ratings.findIndex((rating: Rating) => rating.user === props.user._id || props.user.id) === -1 &&
+                    { ratings.findIndex((rating: Rating) => rating.user === props.user._id) === -1 &&
 
                         <div className={styles.emptyContainer}>
                         {ratings.length === 0  ?

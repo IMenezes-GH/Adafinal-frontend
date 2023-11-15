@@ -12,7 +12,6 @@ type Game = {
 
 type User = {
     _id?: string,
-    id?: string,
     description?: string,
     state?: string,
     active?: boolean,
@@ -28,7 +27,6 @@ type User = {
 
 type Rating = {
     _id: string,
-    id: string,
     game: string,
     user: string,
     description: string,
@@ -37,7 +35,6 @@ type Rating = {
 
 type Category = {
     _id?: string,
-    id?: string,
     name: string,
     active: boolean
 }
