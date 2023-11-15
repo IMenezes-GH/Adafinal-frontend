@@ -1,11 +1,12 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import styles from './GamePage.module.css'
-import { requestAPI } from '../api/fetchData'
-import Dialog from './Dialog/Dialog'
+import { requestAPI } from '../../../../api/fetchData'
+import Dialog from '../../../Dialog/Dialog'
 import { Link } from 'react-router-dom'
-import profileIcon from '../assets/profile-icon.svg'
-import fullStar from '../assets/star_full.svg'
+import profileIcon from '../../../../assets/profile-icon.svg'
+import fullStar from '../../../../assets/star_full.svg'
+
 interface IProps{
     user: User,
     token: string

@@ -1,7 +1,7 @@
 import Dialog from "./Dialog"
 import { ReactElement, FormEvent } from "react"
 import { requestAPI } from "../../api/fetchData"
-import CategorySelector from "../CategorySelector"
+import CategorySelector from "../Category/CategorySelector"
 
 interface IGameDialog {
     title: string,

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from './GamesList.module.css'
 import { Link } from "react-router-dom";
-import CategorySelector from "./CategorySelector";
+import CategorySelector from "../../Category/CategorySelector";
 
 interface Props {
   gameList: Game[],

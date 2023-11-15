@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { requestAPI } from '../../../api/fetchData';
+import { requestAPI } from '../../../../api/fetchData';
 import ProfileContainerLeft from './ProfileContainerLeft';
 import ProfileContainerRight from './ProfileContainerRight';
-
-
 
 interface IProfileContainer {
     user: User
@@ -32,7 +30,7 @@ const ProfileCard = (props: IProfileContainer) => {
             })
         }
 
-      }, [])
+      }, [params, profile])
 
       
   return (

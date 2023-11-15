@@ -1,5 +1,5 @@
 import styles from './ProfileLayout.module.css'
-import ProfileCard from './ProfileLayout/ProfileCard'
+import ProfileCard from './ProfileComponents/ProfileCard'
 
 const ProfileLayout = (props: userProps) => {
 
