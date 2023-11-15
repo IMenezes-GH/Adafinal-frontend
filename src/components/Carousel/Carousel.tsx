@@ -29,11 +29,11 @@ export default class Carousel extends Component {
     currentIndex = 0;
     state = {
         cards: [
-            {content: 'first'}, 
-            {content: 'second'}, 
-            {content: 'third'}, 
-            {content: 'fourth'}, 
-            {content: 'fifth'}],
+            {content: ''}, 
+            {content: ''}, 
+            {content: ''}, 
+            {content: ''}, 
+            {content: ''}],
         currentIndex: 0
     };
 

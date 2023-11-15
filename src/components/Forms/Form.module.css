@@ -6,7 +6,8 @@
     border-radius: .2rem;
     padding: 3rem 100%;
 
-    overflow-y: hidden;
+    overflow-y: auto;
+    height: fit-content;
 
     display: grid;
     gap: .5rem;
