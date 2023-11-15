@@ -1,45 +1,40 @@
-import Header from './components/Header'
 import './App.css'
 import {Routes, Route, Outlet} from 'react-router-dom'
-import NewsLayout from './components/Layouts/NewsLayout'
-import LoginLayout from './components/Layouts/LoginLayout'
-import LoginForm from './components/forms/LoginForm'
-import RegisterForm from './components/forms/RegisterForm'
-import GamesList from './components/GamesList'
-import RankingLayout from './components/Layouts/RankingLayout'
-import ForumLayout from './components/Layouts/ForumLayout'
-import ProfileLayout from './components/Layouts/ProfileLayout'
+import NewsLayout from './components/Layouts/NewsLayout/NewsLayout'
+import LoginLayout from './components/Layouts/LoginLayout/LoginLayout'
+import LoginForm from './components/Forms/LoginForm'
+import RegisterForm from './components/Forms/RegisterForm'
+import GamesList from './components/Layouts/GamesLayout/GamesList'
+import RankingLayout from './components/Layouts/RankingLayout/RankingLayout'
+import ForumLayout from './components/Layouts/ForumLayout/ForumLayout'
+import ProfileLayout from './components/Layouts/ProfileLayout/ProfileLayout'
 import { BASE_URL } from './api/fetchData'
 
 import { useEffect, useState } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { refreshAPI } from './api/fetchData'
 import Logout from './components/Logout'
-import GamesPage from './components/GamePage'
-import Footer from './components/Footer'
+import GamePage from './components/Layouts/GamesLayout/GamePage/GamePage'
+
+import Footer from './components/LayoutFooter/Footer'
+import Header from './components/LayoutHeader/Header'
 
 function App() {
-  
-  const [user, setUser] = useState<User>({username: '', name: '', description: '', state: '', country: ''});
-  const [token, setToken] = useState('');
-  const [gameList, setGameList] = useState([]);
-  const [category, setCategory] = useState<Category[]>([]);
-  
+    
+    const [user, setUser] = useState<User>({username: '', name: '', description: '', state: '', country: ''});
+    const [token, setToken] = useState('');
+    const [gameList, setGameList] = useState([]);
+
+
   const loadGames = async () => {
     const response = await fetch(BASE_URL + '/games/all');
     const message = await response.json();
     setGameList(message)
   }
 
-  const loadCategories = async() => {
-    const response = await fetch(BASE_URL + '/category');
-    const message = await response.json()
-    setCategory(message);
-  }
-
   useEffect(() => {
  
-    loadCategories();
+    // loadCategories();
     loadGames();
     
     const jwt = token && (jwtDecode(token))
@@ -54,7 +49,7 @@ function App() {
       })
     }
     
-  }, [token])
+  }, [token, user])
   
   const Layout = () => {
     
@@ -74,8 +69,8 @@ function App() {
     <Routes>
       <Route path={"/"} element={<Layout />}>
         <Route index element={<NewsLayout/>} />
-        <Route path={"games"} element={<GamesList gameList={gameList} setGameList={setGameList} category={category} />} />
-        <Route path={"/games/:gameid"} element={<GamesPage category={category} token={token} user={user}/>}/>
+        <Route path={"games"} element={<GamesList gameList={gameList} setGameList={setGameList} />} />
+        <Route path={"/games/:gameid"} element={<GamePage token={token} user={user}/>}/>
         <Route path={"forum"} element={<ForumLayout />} />
         <Route path={"ranking"} element={<RankingLayout />} />
         <Route path={"profile"} 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { requestAPI } from "../api/fetchData";
+import { requestAPI } from "../../api/fetchData";
 import styles from './CategorySelector.module.css';
 
 interface IProps{

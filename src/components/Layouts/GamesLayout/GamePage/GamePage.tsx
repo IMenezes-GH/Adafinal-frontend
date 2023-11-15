@@ -1,15 +1,15 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import styles from './GamePage.module.css'
-import { requestAPI } from '../api/fetchData'
-import Dialog from './Dialog/Dialog'
+import { requestAPI } from '../../../../api/fetchData'
+import Dialog from '../../../Dialog/Dialog'
 import { Link } from 'react-router-dom'
-import profileIcon from '../assets/profile-icon.svg'
-import fullStar from '../assets/star_full.svg'
+import profileIcon from '../../../../assets/profile-icon.svg'
+import fullStar from '../../../../assets/star_full.svg'
+
 interface IProps{
     user: User,
-    token: string,
-    category: Category[]
+    token: string
 }
 
 interface IStarProps {
@@ -35,9 +35,11 @@ const GamePage = (props: IProps) => {
     const param = useParams();
     const [game, setGame] = useState<Game>();
     const [ratings, setRatings] = useState([]);
+    const [gameScore, setGameScore] = useState<number | '???'>('???');
     const [isOpen, setIsOpen] = useState(false);
 
-    const navigate = useNavigate();<output id='output'></output>
+    const navigate = useNavigate();
+
     
     const handleSubmit = async(ev: FormEvent) => {
         ev.preventDefault();
@@ -47,7 +49,7 @@ const GamePage = (props: IProps) => {
             game: param.gameid,
             description: target.description.value,
             score: Number(target.score.value),
-            user: props.user._id || props.user.id
+            user: props.user._id
         }
 
         const {response, message} = await requestAPI('/ratings', {
@@ -60,26 +62,32 @@ const GamePage = (props: IProps) => {
             },
             body: JSON.stringify(data)
         })
-        if (response.ok) setIsOpen(false);
+        if (response.ok) {
+            setIsOpen(false)
+            location.reload();
+        }
         else target.output.innerText = message;
     }
     
     const fetchGame = async() => {
         const {message} = await requestAPI('/games/' + param.gameid);
-        const categoryObject = props.category.filter((cat: Category) => cat._id === message.category)[0]
-        if (categoryObject){
-            message.category = categoryObject.name;
+        const category: Category = (await requestAPI('/category?_id=' + message.category)).message;
+
+        if (category){
+            message.category = category.name;
             setGame(message)
         }
     }
     
-
     const fetchRatings = async() => {
+
         const {message} = await requestAPI('/ratings?game=' + param.gameid);
+        const score = message.reduce((prev: number, curr: Rating) => {
+            return prev + curr.score
+        }, 0)
+        setGameScore(score > 0 ? (score / message?.length) : '???')
         setRatings(message);
     }
-
-
 
     useEffect(() => {
         fetchGame();
@@ -92,7 +100,7 @@ const GamePage = (props: IProps) => {
         <>
             <section>
                 <div className={styles.gameBanner} role="image" style={{backgroundImage: `url(${game.imageURL})`}}>
-                    <h1 className='title'>{game.name} </h1>
+                    <h1 className='title'>{game.name} {gameScore}/5</h1>
                 </div>
                 <div className={styles.gameDescription}>
                     <h1><span>{game.name}</span></h1>
@@ -118,7 +126,7 @@ const GamePage = (props: IProps) => {
                             </li>
                         )
                     })}
-                    { ratings.findIndex((rating: Rating) => rating.user === props.user._id || props.user.id) === -1 &&
+                    { ratings.findIndex((rating: Rating) => rating.user === props.user._id) === -1 &&
 
                         <div className={styles.emptyContainer}>
                         {ratings.length === 0  ?
