@@ -54,7 +54,7 @@ const ProfileContainerLeft = (props: IProfileContainer) => {
         <div className={styles.profileContent}>
           <p>{profile.country}</p>
           <p>{profile.name}</p>
-          <p>{profile.email}</p>
+          {/* <p>{profile.email}</p> */}
         </div>
       </article>
       <hr />

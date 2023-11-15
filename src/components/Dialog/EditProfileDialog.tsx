@@ -61,7 +61,7 @@ const EditProfileDialog = (props: IEditProfileDialog) => {
           </div>
           <div className='row'>
             
-            <input type="text" id='fullName' placeholder='Novo nome'/>
+            <input type="text" id='fullName' placeholder='Nome Completo'/>
           </div>
           <div className='row'>
            
