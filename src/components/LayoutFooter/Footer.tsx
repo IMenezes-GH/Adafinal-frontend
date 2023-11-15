@@ -1,9 +1,9 @@
 import { FormEvent, useState } from 'react';
-import Dialog from './Dialog/Dialog';
+import Dialog from '../Dialog/Dialog';
 import styles from './Footer.module.css';
 import { ReactElement } from 'react';
-import CategorySelector from './CategorySelector';
-import { requestAPI } from '../api/fetchData';
+import CategorySelector from '../CategorySelector';
+import { requestAPI } from '../../api/fetchData';
 
 interface IFooter {
     user: User

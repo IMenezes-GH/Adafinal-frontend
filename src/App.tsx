@@ -1,4 +1,3 @@
-import Header from './components/Header'
 import './App.css'
 import {Routes, Route, Outlet} from 'react-router-dom'
 import NewsLayout from './components/Layouts/NewsLayout'
@@ -16,7 +15,9 @@ import { jwtDecode } from 'jwt-decode'
 import { refreshAPI } from './api/fetchData'
 import Logout from './components/Logout'
 import GamesPage from './components/GamePage'
-import Footer from './components/Footer'
+
+import Footer from './components/LayoutFooter/Footer'
+import Header from './components/LayoutHeader/Header'
 
 function App() {
   

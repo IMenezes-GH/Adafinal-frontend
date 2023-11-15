@@ -1,0 +1,32 @@
+
+.Nav{
+  
+    height: 5vh;
+    width: 100vw;
+    box-sizing: border-box;
+    
+    & ul {
+          
+        height: 100%;
+          background-color: rgb(14, 14, 17);
+          color: white;
+  
+          list-style-type: none;  
+  
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+  
+          & a {
+            user-select: none;
+          }
+  
+          & a:hover{
+            color: rgb(255, 255, 255);
+            text-shadow:  -1px -1px 0 rgb(199, 196, 211),
+                          2px -2px 2px rgb(22, 165, 190),
+                          -2px 2px 2px rgb(231, 71, 43),
+                          1px 1px 0 rgb(131, 61, 40);
+          }
+      }
+  }
