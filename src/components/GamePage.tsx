@@ -84,7 +84,7 @@ const GamePage = (props: IProps) => {
         const score = message.reduce((prev: number, curr: Rating) => {
             return prev + curr.score
         }, 0)
-        setGameScore(score > 0 ? (score / message.length) : '???')
+        setGameScore(score > 0 ? (score / message?.length) : '???')
         setRatings(message);
     }
 
