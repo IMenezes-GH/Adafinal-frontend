@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent,  useEffect, useState } from "react"
 import { requestAPI } from "../../api/fetchData";
 import styles from './CategorySelector.module.css';
 
@@ -9,21 +9,18 @@ interface IProps{
 const CategorySelector = (props: IProps) => {
 
     const [categories, setCategories] = useState([]);
-    const defaultCategory = (sessionStorage.getItem("category") || 'all')
-    const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
+    const [selectedCategory, setSelectedCategory] = useState((sessionStorage.getItem("category") || 'all'));
 
+    // Loads categories on load
     useEffect(() => {
-        const request = (async() => await requestAPI('/category', {
-            method: 'GET'
-        }))();
-
-        request.then((r) => {
+        requestAPI('/category').then((r) => {
             setCategories(r.message)
         })
     }, [])
 
     const handleChange = (ev: ChangeEvent) => {
         setSelectedCategory((ev.target as HTMLSelectElement).value);
+        sessionStorage.setItem("category", (ev.target as HTMLSelectElement).value)
     }
 
   return (
