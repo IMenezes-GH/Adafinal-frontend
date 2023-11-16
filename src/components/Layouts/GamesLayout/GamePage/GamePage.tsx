@@ -37,7 +37,7 @@ const GamePage = (props: IGamePage) => {
     const param = useParams();
     const [game, setGame] = useState<Game>();
     const [ratings, setRatings] = useState([]);
-    const [gameScore, setGameScore] = useState<number | '???'>('???');
+    const [gameScore, setGameScore] = useState<number | string | '???'>('???');
     const [isOpen, setIsOpen] = useState(false);
 
     const navigate = useNavigate();
@@ -87,7 +87,7 @@ const GamePage = (props: IGamePage) => {
         const score = message.reduce((prev: number, curr: Rating) => {
             return prev + curr.score
         }, 0)
-        setGameScore(score > 0 ? (score / message?.length) : '???')
+        setGameScore(score > 0 ? ((score / message?.length).toFixed(1)) : '???')
         setRatings(message);
     }
 
