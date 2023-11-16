@@ -40,7 +40,7 @@ type Category = {
 }
 
 interface userProps {
-    user: User,
+    user: User | null,
     setUser: CallableFunction
     token: string,
     setToken: CallableFunction

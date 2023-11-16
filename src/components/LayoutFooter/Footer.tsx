@@ -3,20 +3,18 @@ import styles from './Footer.module.css';
 import AdminFooter from './AdminFooter';
 
 interface IFooter {
-    user: User
-    token: string,
-    gameList: Game[],
-    setGameList: CallableFunction
+    user: User | null
+    token: string
 }
 
 const Footer = (props: IFooter) => {
 
-    const {token, gameList, setGameList} = props;
+    const {token} = props;
 
     // Se usuário for admin, painel do admin é mostrado
     const content = (
-        props.user.roles === 'admin' 
-        ? <AdminFooter token={token} gameList={gameList} setGameList={setGameList}/> 
+        props.user?.roles === 'admin' 
+        ? <AdminFooter token={token}/> 
         : <div>2023</div>
     )
     

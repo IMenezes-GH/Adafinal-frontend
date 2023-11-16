@@ -5,14 +5,12 @@ import CreateGameDialog from "../Dialog/CreateGameDialog";
 import styles from './Footer.module.css'
 
 interface IAdminFooter {
-    token: string,
-    gameList: Game[],
-    setGameList: CallableFunction
+    token: string
 }
 
 const AdminFooter = (props: IAdminFooter) => {
 
-    const {token, gameList, setGameList} = props
+    const {token} = props
 
     const [categoryOpen, setCategoryOpen] = useState(false);
     const [gameOpen, setGameOpen] = useState(false);
@@ -28,7 +26,7 @@ const AdminFooter = (props: IAdminFooter) => {
             </li>
         </ul>
         <CreateCategoryDialog token={token} title='' isOpen={categoryOpen} setIsOpen={setCategoryOpen}/>
-        <CreateGameDialog gameList={gameList} setGameList={setGameList} token={token} title='' isOpen={gameOpen} setIsOpen={setGameOpen} />
+        <CreateGameDialog token={token} title='' isOpen={gameOpen} setIsOpen={setGameOpen} />
     </div>
   )
 }

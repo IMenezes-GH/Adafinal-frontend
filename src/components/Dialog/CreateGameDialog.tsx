@@ -7,10 +7,8 @@ interface IGameDialog {
     title: string,
     isOpen: boolean,
     token: string,
-    gameList?: Game[],
     children?: ReactElement | ReactElement[]
     setIsOpen: CallableFunction,
-    setGameList?: CallableFunction
 }
 
 

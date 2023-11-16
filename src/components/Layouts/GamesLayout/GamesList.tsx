@@ -4,22 +4,23 @@ import { Link } from "react-router-dom";
 import CategorySelector from "../../Category/CategorySelector";
 import { requestAPI } from "../../../api/fetchData";
 
-interface Props {
-  gameList: Game[],
-  setGameList: CallableFunction
-}
 
-const GamesList = (props: Props) => {
+const GamesList = () => {
 
-  
   const [isLoaded, setIsLoaded] = useState(false);
   const [recommendedGames, setRecommendedGames] = useState<Game[]>();
+  const [selectedCategory, setSelectedCategory] = useState(sessionStorage.getItem('category') || 'all');
+  const [games, setGames] = useState([]);
 
   useEffect(() => {
 
     (requestAPI('/games')).then((res) => {
       const {message, response} = res;
       if (response.ok){
+        
+        setGames(message);
+        sessionStorage.setItem('allGames', JSON.stringify(message));
+
         setRecommendedGames(message.slice(0, 2));
         setIsLoaded(true);
       }
@@ -27,17 +28,30 @@ const GamesList = (props: Props) => {
 
   }, [])
 
+  useEffect(() => {
+    if (selectedCategory === 'all') {
+      setGames(JSON.parse(sessionStorage.getItem('allGames') || '[]'))
+    }
+    else (requestAPI('/games?category=' + selectedCategory)).then((res) => {
+      const {message, response} = res;
+      if (response.ok){
+        setGames(message);
+      }
+    })
+
+  }, [selectedCategory])
+
   return (
     <main className={styles.gameMain}>
         <section className={styles.pageHeader}>
           <h1 className="title">Jogos</h1>
-          <CategorySelector/>
+          <CategorySelector selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
         </section>
         <section className={styles.gameListsSection}>
           <div>
             <h2>Últimos jogos adicionados:</h2>
             <ul>
-              {isLoaded ? props.gameList?.map((game: Game, index) => {
+              {isLoaded ? games.map((game: Game, index) => {
                 return (
                 <li key={index}>
                   <article className={styles.gameArticle}>

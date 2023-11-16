@@ -7,17 +7,13 @@ import Nav from './Nav'
 import { requestAPI } from '../../api/fetchData'
 
 
-interface userProps {
-  user: User,
+interface IHeader {
+  user: User | null,
   setUser : CallableFunction
-  token: string,
-  gameList: Game[],
-  setGameList: CallableFunction
+  token: string
 }
 
-
-
-const Header = (props: userProps) => {
+const Header = (props: IHeader) => {
   
   const [isOpen, setIsOpen] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -71,9 +67,9 @@ const Header = (props: userProps) => {
   const handleSearchGame = async()=>{
     const {response, message} = await requestAPI('/games?name='+gameSearch);
     if (response.ok){
-      props.setGameList(message)
+     
       sessionStorage.setItem('searchedGames', JSON.stringify(message))
-      props.setGameList(message)
+   
       searchRef.current?.focus();
       if (location.pathname !== '/games'){
           navigate('/games');
@@ -94,9 +90,9 @@ const Header = (props: userProps) => {
             <img src={profileIcon} alt="" />
             <span>|</span>
             {props.token 
-            ? <p onClick={handleOpenDropdown}>{props.user.username || 'Entrar'}</p>  
+            ? <p onClick={handleOpenDropdown}>{props.user?.username || 'Entrar'}</p>  
             : <Link to={props.token ? 'profile' : 'login'}>
-              {props.user.username || 'Entrar'}
+              {props.user?.username || 'Entrar'}
               </Link> 
             }
             {/* <Link to={props.token ? 'profile' : 'login'}>{props.user.username || 'Entrar'}</Link> */}

@@ -1,40 +1,32 @@
 import './App.css'
 import {Routes, Route, Outlet} from 'react-router-dom'
-import NewsLayout from './components/Layouts/NewsLayout/NewsLayout'
-import LoginLayout from './components/Layouts/LoginLayout/LoginLayout'
-import LoginForm from './components/Forms/LoginForm'
-import RegisterForm from './components/Forms/RegisterForm'
-import GamesList from './components/Layouts/GamesLayout/GamesList'
-import RankingLayout from './components/Layouts/RankingLayout/RankingLayout'
-import ForumLayout from './components/Layouts/ForumLayout/ForumLayout'
-import ProfileLayout from './components/Layouts/ProfileLayout/ProfileLayout'
-import { BASE_URL } from './api/fetchData'
-
 import { useEffect, useState } from 'react'
 import { jwtDecode } from 'jwt-decode'
 import { refreshAPI } from './api/fetchData'
-import Logout from './components/Logout'
+
+import LoginForm from './components/Forms/LoginForm'
+import RegisterForm from './components/Forms/RegisterForm'
+import GamesList from './components/Layouts/GamesLayout/GamesList'
+
+import LoginLayout from './components/Layouts/LoginLayout/LoginLayout'
+import NewsLayout from './components/Layouts/NewsLayout/NewsLayout'
+import RankingLayout from './components/Layouts/RankingLayout/RankingLayout'
+import ProfileLayout from './components/Layouts/ProfileLayout/ProfileLayout'
+import ForumLayout from './components/Layouts/ForumLayout/ForumLayout'
+
 import GamePage from './components/Layouts/GamesLayout/GamePage/GamePage'
+import Logout from './components/Logout'
 
 import Footer from './components/LayoutFooter/Footer'
 import Header from './components/LayoutHeader/Header'
 
 function App() {
     
-    const [user, setUser] = useState<User>({username: '', name: '', description: '', state: '', country: ''});
+    const [user, setUser] = useState<User | null>(null);
     const [token, setToken] = useState('');
-    const [gameList, setGameList] = useState([]);
 
-  const loadGames = async () => {
-    const response = await fetch(BASE_URL + '/games/all');
-    const message = await response.json();
-    setGameList(message)
-  }
 
   useEffect(() => {
- 
-    // loadCategories();
-    loadGames();
     
     const jwt = token && (jwtDecode(token))
     const current_time = new Date().getTime() / 1000;
@@ -55,10 +47,10 @@ function App() {
     return (
       <>
       <div className='block'>
-        <Header gameList={gameList} setGameList={setGameList} user={user} setUser={setUser} token={token}/>
+        <Header user={user} setUser={setUser} token={token}/>
       </div>
       <Outlet />
-      <Footer gameList={gameList} setGameList={setGameList} token={token} user={user}/>
+      <Footer user={user} token={token}/>
       </>
     )
   }
@@ -68,7 +60,7 @@ function App() {
     <Routes>
       <Route path={"/"} element={<Layout />}>
         <Route index element={<NewsLayout/>} />
-        <Route path={"games"} element={<GamesList gameList={gameList} setGameList={setGameList} />} />
+        <Route path={"games"} element={<GamesList />} />
         <Route path={"/games/:gameid"} element={<GamePage token={token} user={user}/>}/>
         <Route path={"forum"} element={<ForumLayout />} />
         <Route path={"ranking"} element={<RankingLayout />} />

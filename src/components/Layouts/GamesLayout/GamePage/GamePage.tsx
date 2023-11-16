@@ -7,10 +7,7 @@ import { Link } from 'react-router-dom'
 import profileIcon from '../../../../assets/profile-icon.svg'
 import fullStar from '../../../../assets/star_full.svg'
 
-interface IProps{
-    user: User,
-    token: string
-}
+
 
 interface IStarProps {
     score: number
@@ -30,7 +27,12 @@ const Stars = (props: IStarProps) => {
     )
 }
 
-const GamePage = (props: IProps) => {
+interface IGamePage{
+    user: User | null,
+    token: string
+}
+
+const GamePage = (props: IGamePage) => {
     
     const param = useParams();
     const [game, setGame] = useState<Game>();
@@ -49,7 +51,7 @@ const GamePage = (props: IProps) => {
             game: param.gameid,
             description: target.description.value,
             score: Number(target.score.value),
-            user: props.user._id
+            user: props.user?._id
         }
 
         const {response, message} = await requestAPI('/ratings', {
@@ -126,12 +128,12 @@ const GamePage = (props: IProps) => {
                             </li>
                         )
                     })}
-                    { ratings.findIndex((rating: Rating) => rating.user === props.user._id) === -1 &&
+                    { ratings.findIndex((rating: Rating) => rating.user === props.user?._id) === -1 &&
 
                         <div className={styles.emptyContainer}>
                         {ratings.length === 0  ?
                         <>
-                            {props.user.username  ?
+                            {props.user?.username  ?
                             <>
                                 <h2>
                                 Esse jogo não possui avaliações.
@@ -152,7 +154,7 @@ const GamePage = (props: IProps) => {
                         :
 
                         <>
-                        {props.user.username 
+                        {props.user?.username 
                         ?
                             <>
                             <h2>

@@ -1,31 +1,41 @@
-import { ChangeEvent,  useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { requestAPI } from "../../api/fetchData";
 import styles from './CategorySelector.module.css';
 
 interface IProps{
-    forceOption?: boolean
+    forceOption?: boolean,
+    selectedCategory: string,
+    setSelectedCategory: CallableFunction
 }
 
 const CategorySelector = (props: IProps) => {
 
-    const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState((sessionStorage.getItem("category") || 'all'));
+    const [categories, setCategories] = useState(JSON.parse(sessionStorage.getItem('categories') || '[]'));
+    const {selectedCategory, setSelectedCategory} = props;
 
     // Loads categories on load
     useEffect(() => {
-        requestAPI('/category').then((r) => {
-            setCategories(r.message)
-        })
+        console.log(selectedCategory)
+        if (categories.length === 0){
+
+            requestAPI('/category').then((r) => {
+                setCategories(r.message)
+                sessionStorage.setItem('categories', JSON.stringify(r.message))
+            })
+        }
     }, [])
 
     const handleChange = (ev: ChangeEvent) => {
-        setSelectedCategory((ev.target as HTMLSelectElement).value);
-        sessionStorage.setItem("category", (ev.target as HTMLSelectElement).value)
+        if (selectedCategory && setSelectedCategory){
+            const target = ev.target as HTMLInputElement
+            sessionStorage.setItem('category', target.value)
+            setSelectedCategory(target.value)
+        }
     }
 
   return (
-    <select id="category" value={selectedCategory} onChange={(ev)=> {handleChange(ev)}} className={styles.CategorySelector}>
-        {!props.forceOption && <option defaultChecked value={'all'}>Categoria</option>}
+    <select id="category" defaultValue={selectedCategory} value={selectedCategory} onChange={(ev)=> {handleChange(ev)}} className={styles.CategorySelector}>
+        {!props.forceOption && <option value={'all'}>Categoria</option>}
         {categories.length > 0 &&
         categories.map((category: Category) => {
             return (<option key={category._id} value={category._id}>{category.name}</option>)
