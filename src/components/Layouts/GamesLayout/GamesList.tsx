@@ -15,7 +15,7 @@ const GamesList = (props: Props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [recommendedGames, setRecommendedGames] = useState<Game[]>();
   const [category, setCategory] = useState(sessionStorage.getItem('category'));
-  const searchGames = JSON.parse(sessionStorage.getItem("searchedGames") || "[]");
+  // const searchGames = JSON.parse(sessionStorage.getItem("searchedGames") || "[]");
   
 
   useEffect(() => {
@@ -23,7 +23,6 @@ const GamesList = (props: Props) => {
     (requestAPI('/games')).then((res) => {
       const {message, response} = res;
       if (response.ok){
-        // setGameList(message);
         setRecommendedGames(message.slice(0, 2));
         setIsLoaded(true);
       }
