@@ -1,7 +1,6 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-
-const URL = 'http://localhost:3000'
+import { BASE_URL } from "../api/fetchData"
 
 interface props {
     setToken: CallableFunction,
@@ -14,7 +13,7 @@ const Logout = (props: props) => {
     
     const handleLogout = async () => {
 
-        const response = await fetch(URL + '/auth/logout', {
+        const response = await fetch(BASE_URL + '/auth/logout', {
             method: 'post',
             mode: 'cors',
             credentials: 'include',
