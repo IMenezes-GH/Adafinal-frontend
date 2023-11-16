@@ -15,7 +15,6 @@ const CategorySelector = (props: IProps) => {
 
     // Loads categories on load
     useEffect(() => {
-        console.log(selectedCategory)
         if (categories.length === 0){
 
             requestAPI('/category').then((r) => {
