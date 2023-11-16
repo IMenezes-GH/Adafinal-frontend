@@ -1,15 +1,18 @@
-import { useEffect, useRef, useState } from 'react'
+import { FormEvent, useEffect, useRef, useState } from 'react'
 import profileIcon from '../../assets/profile-icon.svg'
 import searchIcon from '../../assets/search-icon.svg'
 import styles from './Header.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Nav from './Nav'
+import { requestAPI } from '../../api/fetchData'
 
 
 interface userProps {
   user: User,
   setUser : CallableFunction
-  token: string
+  token: string,
+  gameList: Game[],
+  setGameList: CallableFunction
 }
 
 
@@ -17,6 +20,11 @@ interface userProps {
 const Header = (props: userProps) => {
   
   const [isOpen, setIsOpen] = useState(false);
+  const searchRef = useRef<HTMLInputElement>(null);
+  const [gameSearch, setGameSearch] = useState('');
+  
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const DropDown = () => {
     const dropdown = useRef<HTMLDivElement>(null);
@@ -53,14 +61,32 @@ const Header = (props: userProps) => {
     setIsOpen(!isOpen)
   }
 
+  const handleSearchChange = (ev: FormEvent) => {
+    
+    const target = ev.target as HTMLInputElement;
+    setGameSearch(target.value)
+
+  }
+  
+  const handleSearchGame = async()=>{
+    const {response, message} = await requestAPI('/games?name='+gameSearch);
+    if (response.ok){
+      props.setGameList(message)
+      searchRef.current?.focus();
+      if (location.pathname !== '/games'){
+          navigate('/games');
+      }
+    }
+  }
+
   return (
     <>
       <div draggable={false} className={styles.Header}>
         <header id='header'>
           <h2 draggable={false} className='title'>BestBrowserGames</h2>
           <form action="">
-            <input type="search" placeholder='Buscar um jogo'/>
-            <button><img src={searchIcon} alt="" /></button>
+            <input ref={searchRef} value={gameSearch} onInput={(ev) => handleSearchChange(ev)} type="search" placeholder='Buscar um jogo'/>
+            <button type='button' onClick={handleSearchGame}><img src={searchIcon} alt="" /></button>
           </form>
           <div className={styles.loginContainer}>
             <img src={profileIcon} alt="" />

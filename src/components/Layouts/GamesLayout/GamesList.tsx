@@ -15,20 +15,18 @@ const GamesList = (props: Props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [recommendedGames, setRecommendedGames] = useState<Game[]>();
 
-
-
   
   useEffect(() => {
 
     (requestAPI('/games')).then((res) => {
       const {message, response} = res;
       if (response.ok){
-        setRecommendedGames(message.slice(0, 2))
+        // setGameList(message);
+        setRecommendedGames(message.slice(0, 2));
+        setIsLoaded(true);
       }
-
     })
 
-    setIsLoaded(true);
   }, [props.gameList])
 
 
@@ -43,7 +41,7 @@ const GamesList = (props: Props) => {
           <div>
             <h2>Últimos jogos adicionados:</h2>
             <ul>
-              {isLoaded ? props.gameList.map((game: Game, index) => {
+              {isLoaded ? props.gameList?.map((game: Game, index) => {
                 return (
                 <li key={index}>
                   <article className={styles.gameArticle}>

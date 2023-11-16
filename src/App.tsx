@@ -25,7 +25,6 @@ function App() {
     const [token, setToken] = useState('');
     const [gameList, setGameList] = useState([]);
 
-
   const loadGames = async () => {
     const response = await fetch(BASE_URL + '/games/all');
     const message = await response.json();
@@ -56,7 +55,7 @@ function App() {
     return (
       <>
       <div className='block'>
-        <Header user={user} setUser={setUser} token={token}/>
+        <Header gameList={gameList} setGameList={setGameList} user={user} setUser={setUser} token={token}/>
       </div>
       <Outlet />
       <Footer gameList={gameList} setGameList={setGameList} token={token} user={user}/>
