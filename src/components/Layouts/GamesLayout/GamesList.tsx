@@ -15,7 +15,9 @@ const GamesList = (props: Props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [recommendedGames, setRecommendedGames] = useState<Game[]>();
   const [category, setCategory] = useState(sessionStorage.getItem('category'));
- 
+  const searchGames = JSON.parse(sessionStorage.getItem("searchedGames") || "[]");
+  
+
   useEffect(() => {
 
     (requestAPI('/games')).then((res) => {
@@ -26,6 +28,7 @@ const GamesList = (props: Props) => {
         setIsLoaded(true);
       }
     })
+
 
     const categorySelectElement = document.getElementById("category") as HTMLSelectElement;
     categorySelectElement.addEventListener("change", async(ev) => {

@@ -23,7 +23,7 @@ const CategorySelector = (props: IProps) => {
     }, [])
 
     const handleChange = (ev: ChangeEvent) => {
-        setSelectedCategory(ev.target.value);
+        setSelectedCategory((ev.target as HTMLSelectElement).value);
     }
 
   return (

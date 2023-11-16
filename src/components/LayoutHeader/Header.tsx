@@ -72,6 +72,8 @@ const Header = (props: userProps) => {
     const {response, message} = await requestAPI('/games?name='+gameSearch);
     if (response.ok){
       props.setGameList(message)
+      sessionStorage.setItem('searchedGames', JSON.stringify(message))
+      props.setGameList(message)
       searchRef.current?.focus();
       if (location.pathname !== '/games'){
           navigate('/games');
