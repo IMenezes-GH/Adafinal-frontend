@@ -7,7 +7,7 @@ interface IProfileContainer {
 
 
 const ProfileContainerRight = (props: IProfileContainer) => {
-    const {username, country, description, banner} = props.profile;
+    const {username, country, description, bannerImageURL} = props.profile;
 
     return (
       <div className={styles.rightContainer}>
@@ -18,7 +18,7 @@ const ProfileContainerRight = (props: IProfileContainer) => {
           <div className={styles.about}>
             <p>{description}</p>
             <hr />
-            <div role='image' className={styles.banner}>{banner && banner}</div>
+            <div className={styles.banner} style={{backgroundImage: `url(${bannerImageURL})`}}></div>
         </div>
       </div>
     )

@@ -6,7 +6,6 @@ export const requestAPI = async(slug: string, options?: RequestInit) => {
 
     const response = await fetch(BASE_URL + slug, options && options);
     const message = await response.json()
-    // console.debug(response, message)
     return {response, message}
 }
 
@@ -44,7 +43,6 @@ export const loginAPI = async(loginData: login) => {
     })
 
     const data = await response.json();
-    console.log(data, response)
     return {ok: response.ok, data}
 
 }

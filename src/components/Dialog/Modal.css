@@ -2,31 +2,55 @@ dialog {
     margin: auto;
     width: fit-content;
     height: fit-content;
-    background-color: rgb(29, 28, 28);
-    border: 2px ridge rgba(206, 206, 206, 0.055);
+    background-color: rgb(12, 11, 11);
+    padding: 1rem;
+    border: 4px ridge rgb(206, 206, 206);
     color: white;
+    box-shadow: -1px -1px 0 rgb(199, 196, 211),
+    3px -3px 0 rgb(22, 165, 190),
+    -1px 3px 0 rgb(231, 71, 43),
+    1px 1px 0 rgb(131, 61, 40);
 
     & > * {
-        margin: 1.25rem;
+        margin: 1.5rem;
     }
 
     & > form {
         display: flex;
         flex-direction: column;
         align-items: start;
-        gap: .5rem;
+        gap: 1.25rem;
+
+
+        & button {
+            cursor: pointer;
+            font-size: 1.0rem;
+            background-color: #9E003A;
+            color: white;
+            font-weight: 400;
+            border: 2px solid white;
+            box-shadow: -1px -1px 0 rgb(199, 196, 211),
+            3px -3px 0 rgb(22, 165, 190),
+            -1px 3px 0 rgb(231, 71, 43),
+            1px 1px 0 rgb(131, 61, 40);
+
+            &:first-of-type{
+                background-color: transparent;
+            }
+            &:hover{
+                background-color: white;
+                color: black;
+                text-shadow: -1px -1px 0 rgb(199, 196, 211),
+                    1px -1px 0 rgb(22, 165, 190),
+                    -1px 1px 0 rgb(231, 71, 43),
+                    1px 1px 0 rgb(131, 61, 40);
+            }
+        }
 
         & > div {
             width: 100%;
             display: flex;
             justify-content: space-between;
-
-            &:last-of-type{
-                justify-content: center;
-                & > button {
-
-                }
-            }
         }
 
         & input, textarea {
@@ -35,10 +59,12 @@ dialog {
             color: white;
 
             appearance: none;
-            border: none;
+            border: 1px dashed rgba(255, 255, 255, 0.295);
             border-bottom: 1px solid white;
-
-            padding: .25rem;
+            border-radius: .2rem;
+            
+            
+            padding: .5rem;
             font-size: 1.2rem;
             box-sizing: content-box;
             

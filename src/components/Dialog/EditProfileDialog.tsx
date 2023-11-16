@@ -23,13 +23,15 @@ const EditProfileDialog = (props: IEditProfileDialog) => {
           active: true,
           _id: profile._id,
           email: target.email.value || profile.email,
-          name: target.fullName.value || profile.name,
           username: target.username.value || profile.username,
-          description: target.description.value || profile.description,
-          profileImageURL: target.profileImageURL.value || profile.profileImageURL,
+          name: target.fullName.value,
+          password: target.password.value,
+          description: target.description.value,
+          bannerImageURL: target.bannerImageURL.value,
+          profileImageURL: target.profileImageURL.value,
         }
     
-        const {response, message} = await requestAPI('/users', {
+        const {response} = await requestAPI('/users', {
           method: 'PATCH',
           mode: 'cors',
           credentials: 'include',
@@ -39,14 +41,14 @@ const EditProfileDialog = (props: IEditProfileDialog) => {
           },
           body: JSON.stringify(data)
         })
-        console.log(response, message)
+
         if (response.status === 409) {setErrorMsg('Email e nome de usuário precisam ser valores únicos')}
         else {
           // const updatedUser = message;
           // setUser(updatedUser.user);
           // setToken(updatedUser.token);
           setIsOpen(false);
-          location.reload();
+          // location.reload();
         }
     }
 
@@ -67,13 +69,17 @@ const EditProfileDialog = (props: IEditProfileDialog) => {
            
             <input type="text" id='username'  placeholder='Novo nome de usuário'/>
           </div>
-          <div className='row'>
-            
-            <textarea name="" id="description" placeholder='Descrição (máx: 500)'></textarea>
+          <div>
+          <input type="password" id="password"  placeholder="Nova senha"/>
           </div>
           <div className='row'>
-          
-            <input type="text" id='profileImageURL' placeholder='link para imagem'/>
+            <textarea name="" id="description" defaultValue={profile.description} maxLength={500} placeholder='Descrição (máx: 500)'></textarea>
+          </div>
+          <div className='row'>
+            <input type="text" id='profileImageURL' placeholder='link para imagem do perfil'/>
+          </div>
+          <div>
+            <input type="text" id='bannerImageURL' placeholder='link para imagem do banner'/>
           </div>
           <output style={{color: '#CF4027'}}>{errorMsg}</output>
           <div className='row'>

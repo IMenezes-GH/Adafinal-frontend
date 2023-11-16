@@ -21,8 +21,8 @@ type User = {
     name: string,
     roles?: string,
     username: string,
-    banner?: string,
     profileImageURL?: string,
+    bannerImageURL?: string,
 }
 
 type Rating = {
