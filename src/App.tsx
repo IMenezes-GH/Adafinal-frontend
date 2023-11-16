@@ -24,7 +24,6 @@ function App() {
     const [user, setUser] = useState<User>({username: '', name: '', description: '', state: '', country: ''});
     const [token, setToken] = useState('');
     const [gameList, setGameList] = useState([]);
-    const [gameSearch, setGameSearch] = useState('');
 
   const loadGames = async () => {
     const response = await fetch(BASE_URL + '/games/all');
@@ -56,7 +55,7 @@ function App() {
     return (
       <>
       <div className='block'>
-        <Header gameSearch={gameSearch} setGameSearch={setGameSearch} gameList={gameList} setGameList={setGameList} user={user} setUser={setUser} token={token}/>
+        <Header gameList={gameList} setGameList={setGameList} user={user} setUser={setUser} token={token}/>
       </div>
       <Outlet />
       <Footer gameList={gameList} setGameList={setGameList} token={token} user={user}/>
