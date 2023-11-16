@@ -106,7 +106,7 @@ const GamePage = (props: IGamePage) => {
                 </div>
                 <div className={styles.gameDescription}>
                     <h1><span>{game.name}</span></h1>
-                    <p>Categoria: {game.category}</p>
+                    <p>Categoria: <span className={styles.category}>{game.category}</span></p>
                     <p>{game.description}</p>
                     <hr />
                     <a href={game.url}>Link para o jogo</a>

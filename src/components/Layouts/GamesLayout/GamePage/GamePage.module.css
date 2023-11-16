@@ -31,13 +31,24 @@
     margin: 0 auto;
     width: 70%;
     text-align: justify;
+    padding: 2rem 0;
+
+    & .category{
+        cursor: pointer;
+        color: rgb(255, 252, 61);
+        font-weight: 500;
+    }
+
+    & h1 {
+        padding-bottom: .5rem;
+        border-bottom: 1px solid rgb(255, 255, 255);
+    }
 
     & a {
-        color: rgb(58, 157, 250);
+        color: rgb(255, 252, 61) !important;
         font-weight: 600;
         &:hover{
             text-decoration: underline;
-            color: white;
         }
     }
   }
