@@ -14,8 +14,8 @@ const GamesList = (props: Props) => {
   
   const [isLoaded, setIsLoaded] = useState(false);
   const [recommendedGames, setRecommendedGames] = useState<Game[]>();
-
-  
+  const [category, setCategory] = useState(sessionStorage.getItem('category'));
+ 
   useEffect(() => {
 
     (requestAPI('/games')).then((res) => {
@@ -27,15 +27,28 @@ const GamesList = (props: Props) => {
       }
     })
 
-  }, [props.gameList])
+    const categorySelectElement = document.getElementById("category") as HTMLSelectElement;
+    categorySelectElement.addEventListener("change", async(ev) => {
+      
+      const target = ev.target as HTMLSelectElement;
+      sessionStorage.setItem('category', target.value);
+      setCategory(target.value);
 
-
+      (requestAPI('/games?category='+category)).then((res) => {
+        const {message, response} = res;
+        if (response.ok){
+          props.setGameList(message)
+        }
+      })
+    })
+    
+  }, [])
 
   return (
     <main className={styles.gameMain}>
         <section className={styles.pageHeader}>
           <h1 className="title">Jogos</h1>
-          <CategorySelector />
+          <CategorySelector/>
         </section>
         <section className={styles.gameListsSection}>
           <div>

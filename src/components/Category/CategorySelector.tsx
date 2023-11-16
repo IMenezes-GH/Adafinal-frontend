@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { requestAPI } from "../../api/fetchData";
 import styles from './CategorySelector.module.css';
 
@@ -9,6 +9,8 @@ interface IProps{
 const CategorySelector = (props: IProps) => {
 
     const [categories, setCategories] = useState([]);
+    const defaultCategory = (sessionStorage.getItem("category") || 'all')
+    const [selectedCategory, setSelectedCategory] = useState(defaultCategory);
 
     useEffect(() => {
         const request = (async() => await requestAPI('/category', {
@@ -20,8 +22,12 @@ const CategorySelector = (props: IProps) => {
         })
     }, [])
 
+    const handleChange = (ev: ChangeEvent) => {
+        setSelectedCategory(ev.target.value);
+    }
+
   return (
-    <select id="category" className={styles.CategorySelector}>
+    <select id="category" value={selectedCategory} onChange={(ev)=> {handleChange(ev)}} className={styles.CategorySelector}>
         {!props.forceOption && <option defaultChecked value={'all'}>Categoria</option>}
         {categories.length > 0 &&
         categories.map((category: Category) => {
