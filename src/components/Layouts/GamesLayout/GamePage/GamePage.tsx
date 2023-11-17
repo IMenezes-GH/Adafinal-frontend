@@ -1,11 +1,11 @@
-import { FormEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import styles from './GamePage.module.css'
 import { requestAPI } from '../../../../api/fetchData'
-import Dialog from '../../../Dialog/Dialog'
 import { Link } from 'react-router-dom'
 import profileIcon from '../../../../assets/profile-icon.svg'
 import fullStar from '../../../../assets/star_full.svg'
+import ReviewDialog from '../../../Dialog/ReviewDialog'
 
 
 
@@ -41,35 +41,6 @@ const GamePage = (props: IGamePage) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const navigate = useNavigate();
-
-    
-    const handleSubmit = async(ev: FormEvent) => {
-        ev.preventDefault();
-        const target = ev.target as HTMLFormElement
-        
-        const data = {
-            game: param.gameid,
-            description: target.description.value,
-            score: Number(target.score.value),
-            user: props.user?._id
-        }
-
-        const {response, message} = await requestAPI('/ratings', {
-            method: 'POST',
-            mode: 'cors',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer' + ' ' + props.token
-            },
-            body: JSON.stringify(data)
-        })
-        if (response.ok) {
-            setIsOpen(false)
-            location.reload();
-        }
-        else target.output.innerText = message;
-    }
     
     const fetchGame = async() => {
         const {message} = await requestAPI('/games/' + param.gameid);
@@ -172,31 +143,21 @@ const GamePage = (props: IGamePage) => {
                             }
                         </>
                         }
+                        <ReviewDialog method='POST' title='Criar avaliação' isOpen={isOpen} user={props.user!} setIsOpen={setIsOpen} token={props.token}/>
                     </div>
                     :
                     <>
-                        <h2>
+                        <div className={styles.emptyContainer}>
+                            <h2>
                             Você já avaliou esse jogo.
-                        </h2>
+                            </h2>
+                            <button onClick={() => {setIsOpen(true)}}>Mudou de ideia? Mude a sua avaliação</button>
+                            <ReviewDialog method='PATCH' rating={ratings.find((rating: Rating) => rating.user === props.user?._id)} title='Alterar avaliação' isOpen={isOpen} user={props.user!} setIsOpen={setIsOpen} token={props.token}/>
+                        </div>
                     </>
                     }
                 </ul>
             </section>
-            <Dialog title={'Criar Review'} isOpen={isOpen} setIsOpen={setIsOpen}>
-                    <form onSubmit={(ev) => handleSubmit(ev)}>
-                    <div>
-                        <textarea id="description" rows={3} placeholder='Descrição'></textarea>
-                    </div>
-                    <div>
-                        <input type="number" id='score' placeholder='Nota (1-5)' min={1} max={5} />
-                    </div>
-                    <div className='row'>
-                        <button type='button' onClick={() => setIsOpen(false)}>Cancelar</button>
-                        <button type='submit'>Enviar</button>
-                    </div>
-                    <output id='output'></output>
-                    </form>
-            </Dialog>
         </>
         }
 
