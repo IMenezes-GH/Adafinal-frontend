@@ -128,7 +128,7 @@ const GamePage = (props: IGamePage) => {
                             </li>
                         )
                     })}
-                    { ratings.findIndex((rating: Rating) => rating.user === props.user?._id) === -1 &&
+                    { ratings.findIndex((rating: Rating) => rating.user === props.user?._id) === -1 ?
 
                         <div className={styles.emptyContainer}>
                         {ratings.length === 0  ?
@@ -154,7 +154,7 @@ const GamePage = (props: IGamePage) => {
                         :
 
                         <>
-                        {props.user?.username 
+                        {props.user
                         ?
                             <>
                             <h2>
@@ -167,12 +167,18 @@ const GamePage = (props: IGamePage) => {
                             <h2>
                             Você ainda não avaliou esse jogo.
                             </h2>
-                            <button onClick={() => navigate('/login')}>Faça seu login e seja o primeiro à avaliar!</button>
+                            <button onClick={() => navigate('/login')}>Faça seu login e faça parte da discussão!</button>
                         </>
                             }
                         </>
                         }
                     </div>
+                    :
+                    <>
+                        <h2>
+                            Você já avaliou esse jogo.
+                        </h2>
+                    </>
                     }
                 </ul>
             </section>
