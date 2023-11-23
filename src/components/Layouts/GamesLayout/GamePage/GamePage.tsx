@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import styles from './GamePage.module.css'
 import { requestAPI } from '../../../../api/fetchData'
@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import profileIcon from '../../../../assets/profile-icon.svg'
 import fullStar from '../../../../assets/star_full.svg'
 import ReviewDialog from '../../../Dialog/ReviewDialog'
-
+import { UserContext } from '../../../../context/UserProvider'
 
 
 interface IStarProps {
@@ -27,13 +27,10 @@ const Stars = (props: IStarProps) => {
     )
 }
 
-interface IGamePage{
-    user: User | null,
-    token: string
-}
 
-const GamePage = (props: IGamePage) => {
+const GamePage = () => {
     
+    const {token, user} = useContext(UserContext);
     const param = useParams();
     const [game, setGame] = useState<Game>();
     const [ratings, setRatings] = useState([]);
@@ -99,12 +96,12 @@ const GamePage = (props: IGamePage) => {
                             </li>
                         )
                     })}
-                    { ratings.findIndex((rating: Rating) => rating.user === props.user?._id) === -1 ?
+                    { ratings.findIndex((rating: Rating) => rating.user === user?._id) === -1 ?
 
                         <div className={styles.emptyContainer}>
                         {ratings.length === 0  ?
                         <>
-                            {props.user?.username  ?
+                            {user?.username  ?
                             <>
                                 <h2>
                                 Esse jogo não possui avaliações.
@@ -125,7 +122,7 @@ const GamePage = (props: IGamePage) => {
                         :
 
                         <>
-                        {props.user
+                        {user
                         ?
                             <>
                             <h2>
@@ -143,7 +140,7 @@ const GamePage = (props: IGamePage) => {
                             }
                         </>
                         }
-                        <ReviewDialog method='POST' title='Criar avaliação' isOpen={isOpen} user={props.user!} setIsOpen={setIsOpen} token={props.token}/>
+                        <ReviewDialog method='POST' title='Criar avaliação' isOpen={isOpen} user={user!} setIsOpen={setIsOpen} token={token}/>
                     </div>
                     :
                     <>
@@ -152,7 +149,7 @@ const GamePage = (props: IGamePage) => {
                             Você já avaliou esse jogo.
                             </h2>
                             <button onClick={() => {setIsOpen(true)}}>Mudou de ideia? Mude a sua avaliação</button>
-                            <ReviewDialog method='PATCH' rating={ratings.find((rating: Rating) => rating.user === props.user?._id)} title='Alterar avaliação' isOpen={isOpen} user={props.user!} setIsOpen={setIsOpen} token={props.token}/>
+                            <ReviewDialog method='PATCH' rating={ratings.find((rating: Rating) => rating.user === user?._id)} title='Alterar avaliação' isOpen={isOpen} user={user!} setIsOpen={setIsOpen} token={token}/>
                         </div>
                     </>
                     }

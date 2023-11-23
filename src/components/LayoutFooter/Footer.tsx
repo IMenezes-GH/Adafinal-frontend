@@ -1,20 +1,18 @@
 
 import styles from './Footer.module.css';
 import AdminFooter from './AdminFooter';
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserProvider';
 
-interface IFooter {
-    user: User | null
-    token: string
-}
+const Footer = () => {
 
-const Footer = (props: IFooter) => {
 
-    const {token} = props;
+    const {user} = useContext(UserContext);
 
     // Se usuário for admin, painel do admin é mostrado
     const content = (
-        props.user?.roles === 'admin' 
-        ? <AdminFooter token={token}/> 
+        user?.roles === 'admin' 
+        ? <AdminFooter/> 
         : <div>2023</div>
     )
     

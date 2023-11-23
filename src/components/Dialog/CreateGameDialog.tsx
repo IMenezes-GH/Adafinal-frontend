@@ -1,12 +1,12 @@
 import Dialog from "./Dialog"
-import { ReactElement, FormEvent, useState } from "react"
+import { ReactElement, FormEvent, useState, useContext } from "react"
+import { UserContext } from "../../context/UserProvider"
 import { requestAPI } from "../../api/fetchData"
 import CategorySelector from "../Category/CategorySelector"
 
 interface IGameDialog {
     title: string,
     isOpen: boolean,
-    token: string,
     children?: ReactElement | ReactElement[]
     setIsOpen: CallableFunction,
 }
@@ -14,7 +14,8 @@ interface IGameDialog {
 
 const CreateGameDialog = (props: IGameDialog) => {
 
-    const {token, setIsOpen} = {...props};
+    const {token} = useContext(UserContext);
+    const {setIsOpen} = {...props};
     const [category, setSelectedCategory] = useState('');
     
     const handleSubmit = async(ev: FormEvent) => {

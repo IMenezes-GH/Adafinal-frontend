@@ -1,12 +1,13 @@
 import styles from './Form.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import {loginAPI} from '../../api/fetchData'
-import { FormEvent, useState } from 'react'
-
+import { FormEvent, useState, useContext } from 'react'
+import { UserContext } from '../../context/UserProvider'
 // const URL: string = 'https://adafinal-backend.vercel.app'
 
-const LoginForm = (props: userProps) => {
+const LoginForm = () => {
 
+  const {setToken, setUser} = useContext(UserContext);
   const navigate = useNavigate();
   const [message, setMessage] = useState('');
 
@@ -25,8 +26,8 @@ const LoginForm = (props: userProps) => {
     setMessage(login.data.message);
     if (login.ok) {
 
-      props.setUser(login.data.user);
-      props.setToken(login.data.token);
+      setUser(login.data.user);
+      setToken(login.data.token);
       navigate('/profile')
     }
     else setMessage(login.data.message);

@@ -7,8 +7,8 @@ interface IReviewDialog {
     title: string,
     isOpen: boolean,
     setIsOpen: CallableFunction,
-    user: User,
-    token: string,
+    user: User | null,
+    token: string | null,
     method: 'POST' | 'PATCH',
     rating?: Rating
 }

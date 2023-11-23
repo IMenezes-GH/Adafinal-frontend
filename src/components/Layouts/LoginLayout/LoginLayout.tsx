@@ -1,18 +1,17 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import styles from './LoginLayout.module.css';
+import { UserContext } from '../../../context/UserProvider';
 
-interface ILoginLayout{
-  token?: string
-}
 
-const LoginLayout = (props: ILoginLayout) => {
+const LoginLayout = () => {
 
   const navigate = useNavigate();
+  const { token } = useContext(UserContext);
 
   useEffect(() => {
-    if (props.token) navigate('/profile');
-  }, [props.token, navigate])
+    if (token) navigate('/profile');
+  }, [token, navigate])
 
   return (
     <>

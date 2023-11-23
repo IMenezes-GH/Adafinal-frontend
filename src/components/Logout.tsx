@@ -1,14 +1,13 @@
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { BASE_URL } from "../api/fetchData"
+import { UserContext } from "../context/UserProvider"
 
-interface props {
-    setToken: CallableFunction,
-    setUser: CallableFunction
-}
 
-const Logout = (props: props) => {
+
+const Logout = () => {
     
+    const {setToken, setUser} = useContext(UserContext);
     const navigate = useNavigate();
     
     const handleLogout = async () => {
@@ -23,8 +22,8 @@ const Logout = (props: props) => {
         })
 
         if (response.ok){
-            props.setToken('')
-            props.setUser({username: '', name: '', description: '', state: '', country: ''})
+            setToken(null)
+            setUser(null)
         }
     }
 

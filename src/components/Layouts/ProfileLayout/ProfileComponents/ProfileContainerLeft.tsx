@@ -23,8 +23,7 @@ interface IReview {
   
 interface IProfileContainer {
   profile: User,
-  isUserProfile: boolean,
-  token: string
+  isUserProfile: boolean
 }
 const ProfileContainerLeft = (props: IProfileContainer) => {
 
@@ -38,7 +37,7 @@ const ProfileContainerLeft = (props: IProfileContainer) => {
        return (
         <>
        <button onClick={handleEditProfile} className={styles.editProfile}>Editar Perfil</button>
-        <EditProfileDialog token={props.token} isOpen={isOpen} profile={profile} setIsOpen={setIsOpen}/>
+        <EditProfileDialog isOpen={isOpen} profile={profile} setIsOpen={setIsOpen}/>
         </>
        )
     }

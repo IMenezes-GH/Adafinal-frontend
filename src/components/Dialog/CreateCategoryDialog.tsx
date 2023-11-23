@@ -1,11 +1,11 @@
 import Dialog from "./Dialog"
-import { ReactElement, FormEvent } from "react"
+import { ReactElement, FormEvent, useContext } from "react"
 import { requestAPI } from "../../api/fetchData"
+import { UserContext } from "../../context/UserProvider"
 
 interface ICategoryDialog {
     title: string,
     isOpen: boolean,
-    token: string,
     gameList?: Game[],
     children?: ReactElement | ReactElement[]
     setIsOpen: CallableFunction,
@@ -15,7 +15,8 @@ interface ICategoryDialog {
 
 const CreateCategoryDialog = (props: ICategoryDialog) => {
 
-    const {token, setIsOpen} = {...props};
+    const {token} = useContext(UserContext);
+    const {setIsOpen} = {...props};
 
     const handleSubmit = async(ev: FormEvent) => {
         ev.preventDefault();

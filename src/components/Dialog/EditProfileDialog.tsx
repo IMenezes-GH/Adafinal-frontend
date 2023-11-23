@@ -1,4 +1,5 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useContext } from "react";
+import { UserContext } from "../../context/UserProvider";
 import { requestAPI } from "../../api/fetchData";
 import Dialog from "./Dialog";
 
@@ -6,13 +7,13 @@ import Dialog from "./Dialog";
 interface IEditProfileDialog {
     isOpen: boolean,
     profile: User,
-    setIsOpen: CallableFunction,
-    token: string
+    setIsOpen: CallableFunction
 }
 
 const EditProfileDialog = (props: IEditProfileDialog) => {
 
-    const {isOpen, setIsOpen, profile, token} = props    
+    const {isOpen, setIsOpen, profile} = props    
+    const {token} = useContext(UserContext);
     const [errorMsg, setErrorMsg] = useState('');
 
     const submitModal = async(ev: FormEvent) => {

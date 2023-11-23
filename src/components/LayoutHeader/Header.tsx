@@ -1,20 +1,16 @@
-import { FormEvent, useEffect, useRef, useState } from 'react'
+import { FormEvent, useContext, useEffect, useRef, useState } from 'react'
 import profileIcon from '../../assets/profile-icon.svg'
 import searchIcon from '../../assets/search-icon.svg'
 import styles from './Header.module.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Nav from './Nav'
 import { requestAPI } from '../../api/fetchData'
+import { UserContext } from '../../context/UserProvider'
 
 
-interface IHeader {
-  user: User | null,
-  setUser : CallableFunction
-  token: string
-}
-
-const Header = (props: IHeader) => {
+const Header = () => {
   
+  const {user, token} = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
   const [gameSearch, setGameSearch] = useState('');
@@ -89,17 +85,17 @@ const Header = (props: IHeader) => {
           <div className={styles.loginContainer}>
             <img src={profileIcon} alt="" />
             <span>|</span>
-            {props.token 
-            ? <p onClick={handleOpenDropdown}>{props.user?.username || 'Entrar'}</p>  
-            : <Link to={props.token ? 'profile' : 'login'}>
-              {props.user?.username || 'Entrar'}
+            {token 
+            ? <p onClick={handleOpenDropdown}>{user?.username || 'Entrar'}</p>  
+            : <Link to={token ? 'profile' : 'login'}>
+              {user?.username || 'Entrar'}
               </Link> 
             }
-            {/* <Link to={props.token ? 'profile' : 'login'}>{props.user.username || 'Entrar'}</Link> */}
+            {/* <Link to={token ? 'profile' : 'login'}>{user.username || 'Entrar'}</Link> */}
           </div>
           <DropDown />
         </header>
-        <Nav token={props.token}/>
+        <Nav/>
       </div>
     </>
   )

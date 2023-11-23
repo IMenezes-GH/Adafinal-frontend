@@ -1,13 +1,11 @@
 import styles from './Nav.module.css'
 import { Link } from 'react-router-dom'
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserProvider';  
 
-interface IProps {
-    token: string
-  }
+const Nav = () => {
   
-const Nav = (props: IProps) => {
-  
-    const { token } = props
+  const {token} = useContext(UserContext);
   
     return (
       <nav className={styles.Nav}>

@@ -6,3 +6,5 @@ Resolução do projeto final "BestBrowserGames" do programa <Primeiro Código />
 [Link para o deploy do frontend](https://adafinal-frontend.vercel.app/)  
 [Link para o backend](https://github.com/IMenezes-GH/Adafinal-backend)  
 [Link para o deploy do backend](https://adafinal-backend.vercel.app/api-docs/)  
+
+<img src="./doc/Screenshot_20231122_235222.png">
