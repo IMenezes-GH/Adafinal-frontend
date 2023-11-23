@@ -43,6 +43,46 @@ const GamesList = () => {
 
   }, [selectedCategory])
 
+  const LastGames = (
+    <div>
+      <h2>Últimos jogos adicionados:</h2>
+      <ul>
+        {isLoaded 
+        
+        ? games.map((game: Game, index) => {
+          return (
+          
+          <li key={index}>
+            <article className={styles.gameArticle}>
+              <h1><Link to={'/games/'+game._id}>{game.name}</Link></h1>
+              <p><Link to={'/games/'+game._id}>{game.description.length > 45 ? game.description.substring(0, 45) + '... (Ler mais)' : game.description}</Link></p>
+            </article>
+          </li>)}) 
+        
+        : <p>Loading...</p>}
+      </ul>
+    </div>
+  )
+
+  const RecommendedGames = (
+    <div>
+      <h2>Recomendados para você</h2>
+      <ul className={styles.recommended}>
+      {isLoaded ? recommendedGames?.map((game: Game, index) => {
+          return (
+          <li key={index}>
+            <article className={styles.gameArticle}>
+              <h1><Link to={'/games/'+game._id}>{game.name}</Link></h1>
+              <p><Link to={'/games/'+game._id}>{game.description.length > 100 ? game.description.substring(0, 100) + '... (Ler mais)' : game.description}</Link></p>
+              <div className={styles.banner} style={{backgroundImage: `url(${game.imageURL})`}}>
+              </div>
+            </article>
+          </li>)}) : <p>Loading...</p>}
+      </ul>
+    </div>
+  )
+
+
   return (
     <main className={styles.gameMain}>
         <section className={styles.pageHeader}>
@@ -50,34 +90,8 @@ const GamesList = () => {
           <CategorySelector selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
         </section>
         <section className={styles.gameListsSection}>
-          <div>
-            <h2>Últimos jogos adicionados:</h2>
-            <ul>
-              {isLoaded ? games.map((game: Game, index) => {
-                return (
-                <li key={index}>
-                  <article className={styles.gameArticle}>
-                    <h1><Link to={'/games/'+game._id}>{game.name}</Link></h1>
-                    <p><Link to={'/games/'+game._id}>{game.description.length > 45 ? game.description.substring(0, 45) + '... (Ler mais)' : game.description}</Link></p>
-                  </article>
-                </li>)}) : <p>Loading...</p>}
-            </ul>
-          </div>
-          <div>
-            <h2>Recomendados para você</h2>
-            <ul className={styles.recommended}>
-            {isLoaded ? recommendedGames?.map((game: Game, index) => {
-                return (
-                <li key={index}>
-                  <article className={styles.gameArticle}>
-                    <h1><Link to={'/games/'+game._id}>{game.name}</Link></h1>
-                    <p><Link to={'/games/'+game._id}>{game.description.length > 100 ? game.description.substring(0, 100) + '... (Ler mais)' : game.description}</Link></p>
-                    <div className={styles.banner} style={{backgroundImage: `url(${game.imageURL})`}}>
-                    </div>
-                  </article>
-                </li>)}) : <p>Loading...</p>}
-            </ul>
-          </div>
+          {LastGames}
+          {RecommendedGames}
         </section>
     </main>
   )
