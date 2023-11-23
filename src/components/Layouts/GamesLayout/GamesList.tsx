@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from './GamesList.module.css'
 import { Link } from "react-router-dom";
 import CategorySelector from "../../Category/CategorySelector";
 import { requestAPI } from "../../../api/fetchData";
+import { UserContext } from "../../../context/UserProvider";
 
 
 const GamesList = () => {
@@ -12,21 +13,22 @@ const GamesList = () => {
   const [selectedCategory, setSelectedCategory] = useState(sessionStorage.getItem('category') || 'all');
   const [games, setGames] = useState([]);
 
+  const {search} = useContext(UserContext);
+
   useEffect(() => {
 
-    (requestAPI('/games')).then((res) => {
+    (requestAPI('/games?name=' + search)).then((res) => {
       const {message, response} = res;
       if (response.ok){
         
         setGames(message);
-        sessionStorage.setItem('allGames', JSON.stringify(message));
 
         setRecommendedGames(message.slice(0, 2));
         setIsLoaded(true);
       }
     })
 
-  }, [])
+  }, [search])
 
   useEffect(() => {
     if (selectedCategory === 'all') {

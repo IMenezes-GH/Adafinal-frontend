@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import profileIcon from '../../assets/profile-icon.svg'
 import searchIcon from '../../assets/search-icon.svg'
 import styles from './Header.module.css'
@@ -13,7 +13,7 @@ const Header = () => {
   const {user, token} = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
-  const [gameSearch, setGameSearch] = useState('');
+  const {search, setSearch} = useContext(UserContext);
   
   const location = useLocation();
   const navigate = useNavigate();
@@ -53,15 +53,9 @@ const Header = () => {
     setIsOpen(!isOpen)
   }
 
-  const handleSearchChange = (ev: FormEvent) => {
-    
-    const target = ev.target as HTMLInputElement;
-    setGameSearch(target.value)
-
-  }
   
   const handleSearchGame = async()=>{
-    const {response, message} = await requestAPI('/games?name='+gameSearch);
+    const {response, message} = await requestAPI('/games?name='+search);
     if (response.ok){
      
       sessionStorage.setItem('searchedGames', JSON.stringify(message))
@@ -79,7 +73,7 @@ const Header = () => {
         <header id='header'>
           <h2 draggable={false} className='title'>BestBrowserGames</h2>
           <form action="">
-            <input ref={searchRef} value={gameSearch} onInput={(ev) => handleSearchChange(ev)} type="search" placeholder='Buscar um jogo'/>
+            <input ref={searchRef} value={search} onInput={(ev) => setSearch((ev.target as HTMLInputElement).value)} type="search" placeholder='Buscar um jogo'/>
             <button type='button' onClick={handleSearchGame}><img src={searchIcon} alt="" /></button>
           </form>
           <div className={styles.loginContainer}>
