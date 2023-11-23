@@ -10,10 +10,9 @@
 .gameMain{
     /* background-color: var(--dark); */
     background-image: url('./ben-neale-zpxKdH_xNSI-unsplash.jpg');
-    background-size: cover;
     background-position: 10rem 25rem;
 
-    min-height: 100vh;
+    min-height: fit-content;
     display: flex;
     flex-direction: column;
     & ul {
@@ -60,9 +59,6 @@
         display: flex;
         justify-content: space-between;
         gap: 2rem;
-    }
-    & a {
-        /* color: #16A5BE !important; */
     }
 }
 

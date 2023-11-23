@@ -1,5 +1,5 @@
 import './App.css'
-import {Routes, Route, Outlet} from 'react-router-dom'
+import {Routes, Route} from 'react-router-dom'
 
 import LoginForm from './components/Forms/LoginForm'
 import RegisterForm from './components/Forms/RegisterForm'
@@ -14,24 +14,10 @@ import ForumLayout from './components/Layouts/ForumLayout/ForumLayout'
 import GamePage from './components/Layouts/GamesLayout/GamePage/GamePage'
 import Logout from './components/Logout'
 
-import Footer from './components/LayoutFooter/Footer'
-import Header from './components/LayoutHeader/Header'
+
+import Layout from './components/Layouts/Layout'
 
 function App() {
-    
-
-  const Layout = () => {
-    
-    return (
-      <>
-      <div className='block'>
-        <Header />
-      </div>
-      <Outlet />
-      <Footer/>
-      </>
-    )
-  }
   
   
   return (
